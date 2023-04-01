@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MIDTERM_WINFORM_PAINT.Shape">
+    <Position X="3" Y="0.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAACCAAAIAAAgAAAEAAAEQCAACCAAAAAAQCAACAAAA=</HashCode>
+      <FileName>Shape.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MIDTERM_WINFORM_PAINT.Line">
+    <Position X="1.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAgAAAAAAAAAAAAACAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Line.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MIDTERM_WINFORM_PAINT.Rec">
+    <Position X="4" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAgAAAAAAAAAAAAACAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Rec.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MIDTERM_WINFORM_PAINT.ShapeOutline" Collapsed="true">
+    <Position X="6.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAIAAAAAAAAABAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>ShapeOutline.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MIDTERM_WINFORM_PAINT.GroupOfShape">
+    <Position X="5.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAgAAAAAAAAAAAAACAAAAAAACAAAAAAA=</HashCode>
+      <FileName>GroupOfShape.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
