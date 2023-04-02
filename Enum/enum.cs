@@ -12,12 +12,15 @@ namespace MIDTERM_WINFORM_PAINT
         rec,
         ellipse,
         circle,
+        polygon,
         move,
-        group
+        group,
+        ungroup
     }
 
     enum DrawingState
     {
-
+        none,
+        isDrawingPolygon
     }
 }

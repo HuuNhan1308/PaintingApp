@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
@@ -36,12 +37,13 @@ namespace MIDTERM_WINFORM_PAINT
 
         // Handle Moving object
         PointF PreviousPoint = Point.Empty;
-        Shape SelectedShape; //save shape when handle moving
+        Shape SelectedShape = null; //save shape when handle moving
         bool Moving = false;
 
         //handle enum
-        DrawingMode mode;
+        DrawingMode mode = DrawingMode.line;
         Keys keyListen;
+        DrawingState state = DrawingState.none;
 
 
         /// <summary>
@@ -68,6 +70,19 @@ namespace MIDTERM_WINFORM_PAINT
             this.mode = DrawingMode.group;
             this.IsPress = false;
         }
+        private void ungroupBtn_Click(object sender, EventArgs e)
+        {
+            this.mode = DrawingMode.ungroup;
+        }
+        private void ellipseBtn_Click(object sender, EventArgs e)
+        {
+            this.mode = DrawingMode.ellipse;
+        }
+        private void polygonBtn_Click(object sender, EventArgs e)
+        {
+            this.mode = DrawingMode.polygon;
+        }
+        //------------------------------------------------------------
 
         /// <summary>
         /// Painting Handle Event
@@ -86,6 +101,32 @@ namespace MIDTERM_WINFORM_PAINT
                     Rec myRec = new Rec(e.Location, e.Location, width, myColor, ShapeDashStyle, isFill);
                     ListShape.Add(myRec);
                     PaintingBox.Invalidate();
+                    break;
+                case DrawingMode.ellipse:
+                    Ellipse myEllipse = new Ellipse(e.Location, e.Location, width, myColor, ShapeDashStyle, isFill);
+                    ListShape.Add(myEllipse);
+                    PaintingBox.Invalidate();
+                    break;
+                case DrawingMode.polygon:
+                    this.IsPress = false;
+
+                    //if not drawing polygon then create a new one
+                    if (this.state != DrawingState.isDrawingPolygon)
+                    {
+                        Polygon myPolygon = new Polygon(e.Location, e.Location, width, myColor, ShapeDashStyle, isFill);
+                        ListShape.Add(myPolygon);
+                        PaintingBox.Invalidate();
+                        this.state = DrawingState.isDrawingPolygon;
+                    }
+                    //if is drawing polygon then add a new vertice when mouse down
+                    //kiem tra lai primitive or reference
+                    else
+                    {
+                        
+                        Polygon myOldPolygon = ListShape[ListShape.Count - 1] as Polygon;
+
+                        myOldPolygon.Vertices.Add(e.Location);
+                    }
                     break;
                 case DrawingMode.move:
                     foreach (Shape myShape in ListShape)
@@ -110,6 +151,8 @@ namespace MIDTERM_WINFORM_PAINT
                                 }
                                 this.PaintingBox.Invalidate();
                             }
+
+                            //-----------optimize-----------
                             SelectedShape = myShape;
                             PreviousPoint = e.Location;
                             Moving = true;
@@ -117,6 +160,7 @@ namespace MIDTERM_WINFORM_PAINT
                     }
                     break;
                 case DrawingMode.group:
+                    //this part can be optimize by using same case with moving
                     //handle when we choose to group objects
                     foreach (Shape myShape in ListShape)
                     {
@@ -145,6 +189,51 @@ namespace MIDTERM_WINFORM_PAINT
                         }
                     }
                     break;
+                case DrawingMode.ungroup:
+                    //handle when we choose to group objects
+                    IsPress = false; //turn off so as to prevent mouse move action
+
+                    //dang xu ly ungroup, tam thoi lam 
+
+                    /*this.SelectedShape = null;
+                    foreach (Shape myShape in ListShape)
+                    {
+                        //when hit the group
+                        if (myShape is GroupOfShape groupOfShape && myShape.IsHit(e.Location))
+                        {
+                            //press control key to choose more than one shape
+                            if (this.keyListen == Keys.ControlKey)
+                            {
+
+                                //draw outline for each shape in shapes selected
+                                //toggle ouline bool
+                                if (!myShape.isShowOutline)
+                                {
+                                    listShapeSelected.Add(myShape);
+                                    myShape.isShowOutline = true;
+                                }
+                                else
+                                {
+                                    listShapeSelected.Remove(myShape);
+                                    myShape.isShowOutline = false;
+                                }
+
+                                //draw outline after set outline bool
+                                this.PaintingBox.Invalidate();
+                            }
+                            else 
+                            {
+                                //this.SelectedShape = myShape;
+                                DialogResult result = MessageBox.Show("Do you want to ungroup those shapes?", "Ungroup", MessageBoxButtons.YesNo);
+                                if (result == DialogResult.Yes)
+                                    groupOfShape.Ungroup(ref this.ListShape);
+                            
+                            }
+
+
+                        }
+                    }*/
+                    break;
                 default:
                     break;
             }
@@ -169,6 +258,15 @@ namespace MIDTERM_WINFORM_PAINT
                 ListShape[ListShape.Count - 1].endPoint = e.Location;
                 PaintingBox.Invalidate();
             }
+            else if (this.state == DrawingState.isDrawingPolygon)
+            {
+
+                Polygon myOldPolygon = ListShape[ListShape.Count - 1] as Polygon;
+                myOldPolygon.Vertices[myOldPolygon.Vertices.Count - 1] = e.Location;
+                PaintingBox.Invalidate();
+
+                myOldPolygon = null;
+            }
 
         }
         private void PaintingBox_MouseUp(object sender, MouseEventArgs e)
@@ -180,6 +278,8 @@ namespace MIDTERM_WINFORM_PAINT
             PaintingBox.Invalidate();
         }
 
+        /// <summary>
+        /// Support Function
         //handle draw outline for shape with specific case
         public void HandleDrawShapeOutline(Shape shape, Graphics gp)
         {
@@ -189,15 +289,15 @@ namespace MIDTERM_WINFORM_PAINT
                     shape.startPoint, shape.endPoint);
 
             // Draw a circle as point for shape 
-            if (shape is Line)
+            if (shape is Polygon)
             {
-                ShapeOutline.DrawSelectedPoint(gp,
-                    shape.startPoint, shape.endPoint);
-            }
+                //case polygon draw more circle than other shape
 
-            else if (shape is Rec)
-                ShapeOutline.DrawSelectedPoint(gp,
-                    shape.startPoint, shape.endPoint);
+                //ShapeOutline.DrawSelectedPoint(gp,
+                //    shape.startPoint, shape.endPoint);
+            }
+            else ShapeOutline.DrawSelectedPoint(gp, shape.startPoint, shape.endPoint);
+                
         }
 
         private void PaintingBox_Paint(object sender, PaintEventArgs e)
@@ -209,15 +309,11 @@ namespace MIDTERM_WINFORM_PAINT
 
                 //handle if bool showoueline is active
                 if (shape.isShowOutline)
-                {
                     this.HandleDrawShapeOutline(shape, e.Graphics);
-                }
 
                 //When moving
                 if (this.Moving)
-                {
                     this.HandleDrawShapeOutline(this.SelectedShape, e.Graphics);
-                }
             }
         }
 
@@ -236,7 +332,6 @@ namespace MIDTERM_WINFORM_PAINT
             {
                 case Keys.ControlKey:
                     this.keyListen = Keys.ControlKey;
-                    //Console.WriteLine("click control");
                     break;
             }
         }
@@ -250,20 +345,25 @@ namespace MIDTERM_WINFORM_PAINT
 
                     if (this.mode == DrawingMode.group)
                     {
-                        DialogResult result =  MessageBox.Show("Do you want to group those shapes?", "Group", MessageBoxButtons.YesNo);
+                        DialogResult result = DialogResult.None;
+                        if (this.listShapeSelected.Count > 1)
+                            result =  MessageBox.Show("Do you want to group those shapes?", "Group", MessageBoxButtons.YesNo);
+                        
                         if (result == DialogResult.Yes)
                         {
                             GroupOfShape groupOfShape = new GroupOfShape(this.listShapeSelected);
                             
                             //add group shape to list shape and remove single component
                             ListShape.Add(groupOfShape);
-                            groupOfShape.delSingleComponentFromMain(this.ListShape);
+                            groupOfShape.delSingleComponentFromMain(ref this.ListShape);
 
                             //draw all comopoent in list shape again
                             this.PaintingBox.Invalidate();
                             
                         }
                     }
+
+                    foreach (var item in ListShape) Console.WriteLine(item.ToString());
 
                     //reset list shape and outline properties
                     //---
