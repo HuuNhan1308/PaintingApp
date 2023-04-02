@@ -20,3 +20,14 @@ C:\Users\84928\Desktop\MIDTERM_WINFORM_PAINT\obj\Debug\MIDTERM_WINFORM_PAINT.csp
 C:\Users\84928\Desktop\MIDTERM_WINFORM_PAINT\obj\Debug\MIDTERM_WINFORM_PAINT.csproj.CoreCompileInputs.cache
 C:\Users\84928\Desktop\MIDTERM_WINFORM_PAINT\obj\Debug\MIDTERM_WINFORM_PAINT.exe
 C:\Users\84928\Desktop\MIDTERM_WINFORM_PAINT\obj\Debug\MIDTERM_WINFORM_PAINT.pdb
+C:\Users\Admin\Desktop\PaintingApp\bin\Debug\MIDTERM_WINFORM_PAINT.exe.config
+C:\Users\Admin\Desktop\PaintingApp\bin\Debug\MIDTERM_WINFORM_PAINT.exe
+C:\Users\Admin\Desktop\PaintingApp\bin\Debug\MIDTERM_WINFORM_PAINT.pdb
+C:\Users\Admin\Desktop\PaintingApp\obj\Debug\MIDTERM_WINFORM_PAINT.csproj.AssemblyReference.cache
+C:\Users\Admin\Desktop\PaintingApp\obj\Debug\MIDTERM_WINFORM_PAINT.csproj.SuggestedBindingRedirects.cache
+C:\Users\Admin\Desktop\PaintingApp\obj\Debug\MIDTERM_WINFORM_PAINT.PaintingApp.resources
+C:\Users\Admin\Desktop\PaintingApp\obj\Debug\MIDTERM_WINFORM_PAINT.Properties.Resources.resources
+C:\Users\Admin\Desktop\PaintingApp\obj\Debug\MIDTERM_WINFORM_PAINT.csproj.GenerateResource.cache
+C:\Users\Admin\Desktop\PaintingApp\obj\Debug\MIDTERM_WINFORM_PAINT.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Desktop\PaintingApp\obj\Debug\MIDTERM_WINFORM_PAINT.exe
+C:\Users\Admin\Desktop\PaintingApp\obj\Debug\MIDTERM_WINFORM_PAINT.pdb

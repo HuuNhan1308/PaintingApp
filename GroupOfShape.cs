@@ -10,7 +10,11 @@ namespace MIDTERM_WINFORM_PAINT
 {
     public class GroupOfShape : Shape
     {
-        public List<Shape> shapes = new List<Shape>();
+        public override string ToString()
+        {
+            return "Group Shape";
+        }
+        public List<Shape> shapes;
         
         private List<GraphicsPath> paths = new List<GraphicsPath>();
 
@@ -31,11 +35,35 @@ namespace MIDTERM_WINFORM_PAINT
                 paths.Add(pathSingleShape);
             }
         }
+        public void delSingleComponentFromMain(List<Shape> mainListShapes)
+        {
+            foreach (var shape in shapes)
+                mainListShapes.Remove(shape);
+        }
 
         public GroupOfShape(List<Shape> shapes) 
         {
-            this.shapes = shapes;
-            this.getPathsData(shapes);
+            this.shapes = new List<Shape>(shapes);
+            this.getPathsData(this.shapes);
+
+
+            //get startPoint and endPoint
+            float minX, minY, maxX, maxY;
+            minX = minY = int.MaxValue;
+            maxX = maxY = 0;
+            foreach(Shape shape in this.shapes)
+            {
+                minX = shape.startPoint.X < minX ? shape.startPoint.X : minX;
+                minY = shape.startPoint.Y < minY ? shape.startPoint.Y : minY;
+
+                maxX = shape.endPoint.X > maxX ? shape.endPoint.X : maxX;
+                maxY = shape.endPoint.Y > maxY ? shape.endPoint.Y : maxY;
+
+            }
+
+            this.startPoint = new PointF(minX, minY);
+            this.endPoint = new PointF(maxX, maxY);
+
         }
 
 
@@ -44,20 +72,54 @@ namespace MIDTERM_WINFORM_PAINT
         public override void Draw(Graphics Gra)
         {
             //draw all the shape in list
-            foreach(GraphicsPath path in paths)
+            for(int i = 0; i< shapes.Count; i++)
             {
-                
+                if (shapes[i].IsFill)
+                    using (Brush myBrush = new SolidBrush(this.ShapeColor))
+                    {
+                        Gra.FillPath(myBrush, paths[i]);
+                    }
+                else if (shapes[i] is GroupOfShape groupShapes)
+                    groupShapes.Draw(Gra);
+                else
+                    using (Pen myPen = new Pen(shapes[i].BorderColor, shapes[i].Width)
+                    { DashStyle = shapes[i].ShapeDashStyle})
+                    {
+                        Gra.DrawPath(myPen, paths[i]);
+                    }
             }
         }
 
         public override bool IsHit(PointF Point)
         {
-            throw new NotImplementedException();
+            bool result = false;
+            for (int i = 0; i < shapes.Count; i++)
+            {
+                if (shapes[i].IsFill && paths[i].IsVisible(Point))
+                    return true;
+                else if (shapes[i] is GroupOfShape groupShapes)
+                    groupShapes.IsHit(Point);
+                else if (!shapes[i].IsFill)
+                {
+                    using (Pen MyPen = new Pen(ShapeColor, Width + 2))
+                        result = paths[i].IsOutlineVisible(Point, MyPen);
+                    if (result) return true;
+                }
+            }
+
+            return result;
         }
 
         public override void Move(PointF Dis)
         {
-            throw new NotImplementedException();
+            foreach(var shape in shapes)
+            {
+                shape.startPoint = new PointF(shape.startPoint.X + Dis.X, shape.startPoint.Y + Dis.Y);
+                shape.endPoint = new PointF(shape.endPoint.X + Dis.X, shape.endPoint.Y + Dis.Y);
+                Console.WriteLine(shape.ToString()+ ": " + shape.startPoint + " " + shape.endPoint);
+            }
+            this.startPoint = new PointF(startPoint.X + Dis.X, startPoint.Y + Dis.Y);
+            this.endPoint = new PointF(endPoint.X + Dis.X, endPoint.Y + Dis.Y);
         }
     }
 }

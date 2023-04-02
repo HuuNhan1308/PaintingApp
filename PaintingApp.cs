@@ -246,17 +246,32 @@ namespace MIDTERM_WINFORM_PAINT
             switch (e.KeyCode)
             {
                 case Keys.ControlKey:
+                    
+
+                    if (this.mode == DrawingMode.group)
+                    {
+                        DialogResult result =  MessageBox.Show("Do you want to group those shapes?", "Group", MessageBoxButtons.YesNo);
+                        if (result == DialogResult.Yes)
+                        {
+                            GroupOfShape groupOfShape = new GroupOfShape(this.listShapeSelected);
+                            
+                            //add group shape to list shape and remove single component
+                            ListShape.Add(groupOfShape);
+                            groupOfShape.delSingleComponentFromMain(this.ListShape);
+
+                            //draw all comopoent in list shape again
+                            this.PaintingBox.Invalidate();
+                            
+                        }
+                    }
+
                     //reset list shape and outline properties
+                    //---
                     if (this.mode == DrawingMode.move || this.mode == DrawingMode.group)
                     {
                         this.keyListen = Keys.None;
                         foreach (var item in listShapeSelected) item.isShowOutline = false;
                         this.listShapeSelected.Clear();
-                    }
-
-                    if (this.mode == DrawingMode.group)
-                    {
-
                     }
                     break;
             }

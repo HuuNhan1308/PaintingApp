@@ -16,7 +16,7 @@ namespace MIDTERM_WINFORM_PAINT
         public static Brush MovingShadow = new SolidBrush(Color.White);
         public static void DrawOutlineSelected(this Graphics gp, PointF p1, PointF p2)
         {
-            Pen dashPenShadow = new Pen(Color.FromArgb(240,240,240));
+            Pen dashPenShadow = new Pen(Color.FromArgb(0,0,0));
             dashPenShadow.DashStyle = DashStyle.Dash;
             dashPenShadow.Width = 2;
             gp.DrawRectangle(dashPenShadow, p1.X, p1.Y, p2.X - p1.X, p2.Y - p1.Y);
