@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 
-//Dang lam chuc nang group trong class group of shape
+//dang lam zoom in zoom out
 
 namespace MIDTERM_WINFORM_PAINT
 {
@@ -39,6 +40,7 @@ namespace MIDTERM_WINFORM_PAINT
         PointF PreviousPoint = Point.Empty;
         Shape SelectedShape = null; //save shape when handle moving
         bool Moving = false;
+        bool isHitResizePoint = false;
 
         //handle enum
         DrawingMode mode = DrawingMode.line;
@@ -134,10 +136,11 @@ namespace MIDTERM_WINFORM_PAINT
                         IsPress = false;
                         if (myShape.IsHit(e.Location))
                         {
+                            
+
                             //press control key to choose more than one shape
                             if (this.keyListen == Keys.ControlKey)
                             {
-
                                 //draw outline for each shape in shapes selected
                                 if (!myShape.isShowOutline)
                                 {
@@ -149,13 +152,15 @@ namespace MIDTERM_WINFORM_PAINT
                                     listShapeSelected.Remove(myShape);
                                     myShape.isShowOutline = false;
                                 }
-                                this.PaintingBox.Invalidate();
                             }
-
-                            //-----------optimize-----------
                             SelectedShape = myShape;
                             PreviousPoint = e.Location;
                             Moving = true;
+
+                            this.PaintingBox.Invalidate();
+                            //-----------optimize-----------
+
+
                         }
                     }
                     break;
@@ -252,7 +257,7 @@ namespace MIDTERM_WINFORM_PAINT
                     PaintingBox.Invalidate();
                 }
             }
-            //when out of moving mode, dragging shape is on
+            //when out of moving mode, moving line of shape is on
             else if (IsPress)
             {
                 ListShape[ListShape.Count - 1].EndPoint = e.Location;
@@ -283,16 +288,16 @@ namespace MIDTERM_WINFORM_PAINT
         //handle draw outline for shape with specific case
         public void HandleDrawShapeOutline(Shape shape, Graphics gp)
         {
-            //Draw dash line at border (except line and spcial case for polygon)
+            //Draw dash line at border (except line)
             if (shape is Polygon polygon)
-                ShapeOutline.DrawOutlineSelected(gp, polygon.Vertices);
+                ShapeOutline.DrawOutlineSelected(gp, polygon.BorderStartPoint, polygon.BorderEndPoint);
             else if (!(shape is Line))
                 ShapeOutline.DrawOutlineSelected(gp,
                     shape.StartPoint, shape.EndPoint);
 
             // Draw a circle as point for shape 
             if (shape is Polygon polygon1)
-                ShapeOutline.DrawSelectedPoint(gp, polygon1.Vertices);
+                ShapeOutline.DrawSelectedPoint(gp, polygon1.BorderStartPoint, polygon1.BorderEndPoint);
             //not pologon then draw a 
             else ShapeOutline.DrawSelectedPoint(gp, shape.StartPoint, shape.EndPoint);
                 
@@ -325,8 +330,15 @@ namespace MIDTERM_WINFORM_PAINT
             else
                 this.ShapeDashStyle = DashStyle.Solid;
         }
+        private void clearBtn_Click(object sender, EventArgs e)
+        {
+            this.ListShape.Clear();
+            this.PaintingBox.Invalidate();
+        }
+
 
         //handle key event
+
         private void PaintingApp_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
@@ -386,6 +398,65 @@ namespace MIDTERM_WINFORM_PAINT
                     this.state = DrawingState.none;
                     break;
             }
+        }
+
+        //function copy from INDIAN :)))
+        Image ZoomPicture(Image image, Size size)
+        {
+            Bitmap bm = new Bitmap(image, Convert.ToInt32(image.Width * size.Width),
+                Convert.ToInt32(image.Height * size.Height));
+            Graphics gpu = Graphics.FromImage(bm);
+            gpu.InterpolationMode = InterpolationMode.HighQualityBicubic;
+
+            return bm;
+        }
+
+        private void ZoomInBtn_Click(object sender, EventArgs e)
+        {
+            PointF top, bot;
+
+            
+            //start point always < end point
+            foreach(Shape item in ListShape)
+            {
+                //get changing point
+                if (item is Polygon polygon)
+                {
+                    if (polygon.BorderStartPoint.X > polygon.BorderEndPoint.X)
+                    {
+                        top = polygon.EndPoint;
+                        bot = polygon.StartPoint;
+                    }
+                    else
+                    {
+                        top = polygon.StartPoint;
+                        bot = polygon.EndPoint;
+                    }
+                }
+                else
+                {
+                    if (item.StartPoint.X > item.EndPoint.X)
+                    {
+                        top = item.EndPoint;
+                        bot = item.StartPoint;
+                    }
+                    else
+                    {
+                        top = item.StartPoint;
+                        bot = item.EndPoint;
+                    }
+                }
+
+
+                if (item is Polygon polygon1)
+                {
+                    polygon1.BorderStartPoint = new PointF(top.X / 1.05f, top.Y * 1.05f);
+                    polygon1.EndPoint = new PointF(bot.X * 1.05f, bot.Y * 1.05f);
+                }
+                item.StartPoint = new PointF(top.X / 1.05f, top.Y * 1.05f);
+                item.EndPoint = new PointF(bot.X * 1.05f, bot.Y * 1.05f);
+            }
+            this.PaintingBox.Invalidate();
         }
     }
 }

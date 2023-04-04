@@ -102,12 +102,12 @@ namespace MIDTERM_WINFORM_PAINT
             bool result = false;
             for (int i = 0; i < shapes.Count; i++)
             {
-                if (shapes[i] is GroupOfShape groupShapes) return groupShapes.IsHit(Point);
+                if (shapes[i] is GroupOfShape groupShapes) result =  groupShapes.IsHit(Point);
                 else
                 {
                     result = shapes[i].IsHit(Point);
-                    if (result) return result;
                 }
+                    if (result) return result;
             }
 
             return false;
@@ -140,6 +140,11 @@ namespace MIDTERM_WINFORM_PAINT
             //delete group shape in main list
             mainListShapes.Remove(this);
 
+        }
+
+        public override void Resize(Graphics Gra)
+        {
+            throw new NotImplementedException();
         }
     }
 }

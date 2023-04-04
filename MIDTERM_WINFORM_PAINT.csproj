@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HohoSource\HohoPointF.cs" />
     <Compile Include="Shapes\Ellipse.cs" />
     <Compile Include="Enum\enum.cs" />
     <Compile Include="Polygon.cs" />

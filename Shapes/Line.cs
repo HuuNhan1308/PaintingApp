@@ -57,5 +57,10 @@ namespace MIDTERM_WINFORM_PAINT
             StartPoint = new PointF(StartPoint.X + Dis.X, StartPoint.Y + Dis.Y);
             EndPoint = new PointF(EndPoint.X + Dis.X, EndPoint.Y + Dis.Y);
         }
+
+        public override void Resize(Graphics Gra)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -44,5 +44,7 @@ namespace MIDTERM_WINFORM_PAINT
         public abstract void Move(PointF Dis);
         public abstract bool IsHit(PointF Point);
 
+        public abstract void Resize(Graphics Gra);
+
     }
 }

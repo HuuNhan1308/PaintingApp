@@ -38,6 +38,8 @@
             this.ungroupBtn = new System.Windows.Forms.Button();
             this.ellipseBtn = new System.Windows.Forms.Button();
             this.polygonBtn = new System.Windows.Forms.Button();
+            this.clearBtn = new System.Windows.Forms.Button();
+            this.ZoomInBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PaintingBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -147,17 +149,39 @@
             this.polygonBtn.UseVisualStyleBackColor = true;
             this.polygonBtn.Click += new System.EventHandler(this.polygonBtn_Click);
             // 
+            // clearBtn
+            // 
+            this.clearBtn.Location = new System.Drawing.Point(453, 39);
+            this.clearBtn.Name = "clearBtn";
+            this.clearBtn.Size = new System.Drawing.Size(75, 23);
+            this.clearBtn.TabIndex = 0;
+            this.clearBtn.Text = "Clear";
+            this.clearBtn.UseVisualStyleBackColor = true;
+            this.clearBtn.Click += new System.EventHandler(this.clearBtn_Click);
+            // 
+            // ZoomInBtn
+            // 
+            this.ZoomInBtn.Location = new System.Drawing.Point(372, 39);
+            this.ZoomInBtn.Name = "ZoomInBtn";
+            this.ZoomInBtn.Size = new System.Drawing.Size(75, 23);
+            this.ZoomInBtn.TabIndex = 0;
+            this.ZoomInBtn.Text = "Zoom in";
+            this.ZoomInBtn.UseVisualStyleBackColor = true;
+            this.ZoomInBtn.Click += new System.EventHandler(this.ZoomInBtn_Click);
+            // 
             // PaintingApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(806, 598);
             this.Controls.Add(this.dashCheck);
             this.Controls.Add(this.solidCheck);
             this.Controls.Add(this.PaintingBox);
             this.Controls.Add(this.ungroupBtn);
             this.Controls.Add(this.groupBtn);
             this.Controls.Add(this.SelectBtn);
+            this.Controls.Add(this.ZoomInBtn);
+            this.Controls.Add(this.clearBtn);
             this.Controls.Add(this.polygonBtn);
             this.Controls.Add(this.ellipseBtn);
             this.Controls.Add(this.recBtn);
@@ -185,6 +209,8 @@
         private System.Windows.Forms.Button ungroupBtn;
         private System.Windows.Forms.Button ellipseBtn;
         private System.Windows.Forms.Button polygonBtn;
+        private System.Windows.Forms.Button clearBtn;
+        private System.Windows.Forms.Button ZoomInBtn;
     }
 }
 

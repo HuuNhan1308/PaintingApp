@@ -32,6 +32,10 @@ namespace MIDTERM_WINFORM_PAINT
 
                 return new PointF(minX, minY);
             }
+            set
+            {
+                
+            }
         }
 
         public PointF BorderEndPoint
@@ -130,6 +134,11 @@ namespace MIDTERM_WINFORM_PAINT
         {
             for(int i = 0; i < this.Vertices.Count; ++i)
                 this.Vertices[i] = new PointF(Vertices[i].X + Dis.X, Vertices[i].Y + Dis.Y);
+        }
+
+        public override void Resize(Graphics Gra)
+        {
+            throw new NotImplementedException();
         }
     }
 }
