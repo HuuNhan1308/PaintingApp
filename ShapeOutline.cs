@@ -32,6 +32,18 @@ namespace MIDTERM_WINFORM_PAINT
             gp.DrawPath(dashPenShadow, path);
         }
 
+        public static void DrawOutlineSelected(this Graphics gp, List<PointF> points)
+        {
+            Pen dashPenShadow = new Pen(Color.FromArgb(0, 0, 0));
+            dashPenShadow.DashStyle = DashStyle.Dash;
+            dashPenShadow.Width = 2;
+
+
+            GraphicsPath path = new GraphicsPath();
+            path.AddPolygon(points.ToArray());
+            gp.DrawPath(dashPenShadow, path);
+        }
+
         public static void DrawSelectedPoint(Graphics gp, PointF p1, PointF p2)
         {
             
@@ -39,6 +51,12 @@ namespace MIDTERM_WINFORM_PAINT
             //gp.FillEllipse(ShapeOutline.MovingShadow, new RectangleF(p2.X - 5, p2.Y - 5, 12, 12));
             gp.FillEllipse(ShapeOutline.MovingBrush, new RectangleF(p1.X - 5, p1.Y - 5, 10, 10));
             gp.FillEllipse(ShapeOutline.MovingBrush, new RectangleF(p2.X - 5, p2.Y - 5, 10, 10));
+        }
+
+        public static void DrawSelectedPoint(Graphics gp, List<PointF> points)
+        {
+            foreach(var point in points)
+                gp.FillEllipse(ShapeOutline.MovingBrush, new RectangleF(point.X - 5, point.Y - 5, 10, 10));
         }
     }
 }

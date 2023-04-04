@@ -13,23 +13,27 @@ namespace MIDTERM_WINFORM_PAINT
         public Shape()
         {
         }
-        public Shape(PointF startPoint, PointF endPoint, float Width, Color ShapeColor, DashStyle ShapeDashStyle)
+        public Shape(PointF StartPoint, PointF EndPoint, float Width, Color ShapeColor, DashStyle ShapeDashStyle)
         {
-            this.startPoint = startPoint;
-            this.endPoint = endPoint;
+            this.StartPoint = StartPoint;
+            this.EndPoint = EndPoint;
             this.Width = Width;
             this.ShapeColor = ShapeColor;
             this.ShapeDashStyle = ShapeDashStyle;
         }
 
+        protected PointF startPoint;
+        protected PointF endPoint;
+
+        //--------------------------
+
         public PointF PreviousPoint = Point.Empty;
         public string Name { get; set; }
-        public PointF startPoint { get; set; }
-        public PointF endPoint { get; set; }
+        public PointF StartPoint { get => this.startPoint; set => this.startPoint = value; }
+        public PointF EndPoint { get => this.endPoint; set => this.endPoint = value; }
         public float Width { get; set; }
         public bool IsFill { get; set; } = false;
         public Color BorderColor { get; set; }
-        //public bool IsSelected { get; set; } = false;
         public Color ShapeColor { get; set; }
         public DashStyle ShapeDashStyle { get; set; }
         public abstract GraphicsPath GetPath { get; }

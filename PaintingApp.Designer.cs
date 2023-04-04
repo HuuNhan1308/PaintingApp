@@ -60,6 +60,7 @@
             this.PaintingBox.TabIndex = 1;
             this.PaintingBox.TabStop = false;
             this.PaintingBox.Paint += new System.Windows.Forms.PaintEventHandler(this.PaintingBox_Paint);
+            this.PaintingBox.DoubleClick += new System.EventHandler(this.PaintingBox_DoubleClick);
             this.PaintingBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PaintingBox_MouseDown);
             this.PaintingBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PaintingBox_MouseMove);
             this.PaintingBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PaintingBox_MouseUp);

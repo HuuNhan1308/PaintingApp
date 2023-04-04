@@ -13,8 +13,8 @@ namespace MIDTERM_WINFORM_PAINT
         {
             this.Name = "Line";
         }
-        public Line(PointF startPoint, PointF endPoint, float Width, Color ShapeColor, DashStyle ShapeDashStyle)
-            : base(startPoint, endPoint, Width, ShapeColor, ShapeDashStyle)
+        public Line(PointF StartPoint, PointF EndPoint, float Width, Color ShapeColor, DashStyle ShapeDashStyle)
+            : base(StartPoint, EndPoint, Width, ShapeColor, ShapeDashStyle)
         {
             this.Name = "Line";
         }
@@ -23,7 +23,7 @@ namespace MIDTERM_WINFORM_PAINT
             get
             {
                 GraphicsPath GPath = new GraphicsPath();
-                GPath.AddLine(startPoint, endPoint);
+                GPath.AddLine(StartPoint, EndPoint);
                 return GPath;
             }
         }
@@ -54,8 +54,8 @@ namespace MIDTERM_WINFORM_PAINT
         }
         public override void Move(PointF Dis)
         {
-            startPoint = new PointF(startPoint.X + Dis.X, startPoint.Y + Dis.Y);
-            endPoint = new PointF(endPoint.X + Dis.X, endPoint.Y + Dis.Y);
+            StartPoint = new PointF(StartPoint.X + Dis.X, StartPoint.Y + Dis.Y);
+            EndPoint = new PointF(EndPoint.X + Dis.X, EndPoint.Y + Dis.Y);
         }
     }
 }

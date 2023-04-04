@@ -29,10 +29,12 @@ namespace MIDTERM_WINFORM_PAINT
                 GraphicsPath pathSingleShape = new GraphicsPath();
 
                 if (shape is Line line)
-                    pathSingleShape.AddLine(line.startPoint, line.endPoint);
+                    pathSingleShape.AddLine(line.StartPoint, line.EndPoint);
                 else if (shape is Rec rec)
-                    pathSingleShape.AddRectangle(new RectangleF(rec.startPoint.X, rec.startPoint.Y,
-                        rec.endPoint.X - rec.startPoint.X, rec.endPoint.Y - rec.startPoint.Y));
+                    pathSingleShape.AddRectangle(new RectangleF(rec.StartPoint.X, rec.StartPoint.Y,
+                        rec.EndPoint.X - rec.StartPoint.X, rec.EndPoint.Y - rec.StartPoint.Y));
+                else if (shape is Polygon polygon)
+                    pathSingleShape.AddPolygon(polygon.Vertices.ToArray());
 
                 paths.Add(pathSingleShape);
             }
@@ -49,24 +51,27 @@ namespace MIDTERM_WINFORM_PAINT
             maxX = maxY = 0;
             foreach (Shape shape in this.shapes)
             {
-                if (shape is GroupOfShape groupOfShape) groupOfShape.getStartEndPoint();
+                //if (shape is GroupOfShape groupOfShape) groupOfShape.getStartEndPoint(ref StartPoint,ref EndPoint);
+                if (shape is Polygon polygon)
+                {
+                    minX = Math.Min(minX, polygon.BorderStartPoint.X);
+                    minY = Math.Min(minX, polygon.BorderStartPoint.Y);
 
-                //minX = shape.startPoint.X < minX ? shape.startPoint.X : minX;
-                //minY = shape.startPoint.Y < minY ? shape.startPoint.Y : minY;
+                    maxX = Math.Max(maxX, polygon.BorderEndPoint.X);
+                    maxY = Math.Max(maxY, polygon.BorderEndPoint.Y);
+                }
+                else
+                {
+                    minX = Math.Min(minX, Math.Min(shape.StartPoint.X, shape.EndPoint.X));
+                    minY = Math.Min(minY, Math.Min(shape.StartPoint.Y, shape.EndPoint.Y));
 
-                //maxX = shape.endPoint.X > maxX ? shape.endPoint.X : maxX;
-                //maxY = shape.endPoint.Y > maxY ? shape.endPoint.Y : maxY;
-
-
-                minX = Math.Min(minX, Math.Min(shape.startPoint.X, shape.endPoint.X));
-                minY = Math.Min(minY, Math.Min(shape.startPoint.Y, shape.endPoint.Y));
-
-                maxX = Math.Max(maxX, Math.Max(shape.startPoint.X, shape.endPoint.X));
-                maxY = Math.Max(maxY, Math.Max(shape.startPoint.Y, shape.endPoint.Y));
+                    maxX = Math.Max(maxX, Math.Max(shape.StartPoint.X, shape.EndPoint.X));
+                    maxY = Math.Max(maxY, Math.Max(shape.StartPoint.Y, shape.EndPoint.Y));
+                }
             }
 
-            this.startPoint = new PointF(minX, minY);
-            this.endPoint = new PointF(maxX, maxY);
+            this.StartPoint = new PointF(minX, minY);
+            this.EndPoint = new PointF(maxX, maxY);
         }
         //------------------------------------
 
@@ -114,16 +119,17 @@ namespace MIDTERM_WINFORM_PAINT
             foreach(var shape in shapes)
             {
                 if (shape is GroupOfShape groupShapes) groupShapes.Move(Dis);
+                else if (shape is Polygon polygon) polygon.Move(Dis);
                 else
                 {
-                    shape.startPoint = new PointF(shape.startPoint.X + Dis.X, shape.startPoint.Y + Dis.Y);
-                    shape.endPoint = new PointF(shape.endPoint.X + Dis.X, shape.endPoint.Y + Dis.Y);
+                    shape.StartPoint = new PointF(shape.StartPoint.X + Dis.X, shape.StartPoint.Y + Dis.Y);
+                    shape.EndPoint = new PointF(shape.EndPoint.X + Dis.X, shape.EndPoint.Y + Dis.Y);
                 }
             }
 
             //move start point and end point to change outline location
-            this.startPoint = new PointF(startPoint.X + Dis.X, startPoint.Y + Dis.Y);
-            this.endPoint = new PointF(endPoint.X + Dis.X, endPoint.Y + Dis.Y);
+            this.StartPoint = new PointF(StartPoint.X + Dis.X, StartPoint.Y + Dis.Y);
+            this.EndPoint = new PointF(EndPoint.X + Dis.X, EndPoint.Y + Dis.Y);
         }
 
         public void Ungroup(ref List<Shape> mainListShapes)

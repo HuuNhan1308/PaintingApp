@@ -10,20 +10,62 @@ namespace MIDTERM_WINFORM_PAINT
     public class Polygon : Shape
     {
         public List<PointF> Vertices = new List<PointF>();
+        bool completedVertices = false;
+
+        public PointF BorderStartPoint
+        {
+            //get the start point of outline rectangle
+            get
+            {
+                float minX, minY;
+                minX = minY = int.MaxValue;
+
+                foreach (var point in this.Vertices)
+                {
+                    //lay ra hinh chu nhat outline cua polygon
+
+
+                    minX = Math.Min(minX, Math.Min(point.X, point.X));
+                    minY = Math.Min(minY, Math.Min(point.Y, point.Y));
+
+                }
+
+                return new PointF(minX, minY);
+            }
+        }
+
+        public PointF BorderEndPoint
+        {
+            //get the end point of the outline rectangle
+            get
+            {
+                float maxX, maxY;
+                maxX = maxY = 0;
+                foreach (var point in this.Vertices)
+                {
+
+                    maxX = Math.Max(maxX, Math.Max(point.X, point.X));
+                    maxY = Math.Max(maxY, Math.Max(point.Y, point.Y));
+                }
+
+                return new PointF(maxX, maxY);
+            }
+        }
 
         public Polygon() 
          {
             this.Name = "Polygon";
         }
 
-        public Polygon(PointF startPoint, PointF endPoint, float Width, Color ShapeColor, DashStyle ShapeDastStyle, bool IsFill)
-            : base(startPoint, endPoint, Width, ShapeColor, ShapeDastStyle)
+        public Polygon(PointF StartPoint, PointF EndPoint, float Width, Color ShapeColor, DashStyle ShapeDastStyle, bool IsFill)
+            : base(StartPoint, EndPoint, Width, ShapeColor, ShapeDastStyle)
         {
             this.Name = "Rectangle";
             this.IsFill = IsFill;
             this.BorderColor = ShapeColor;
-            this.Vertices.Add(startPoint);
-            this.Vertices.Add(endPoint);
+            this.Vertices.Add(StartPoint);
+            this.Vertices.Add(EndPoint);
+            this.Vertices.Add(EndPoint);
 
         }
 
@@ -32,10 +74,14 @@ namespace MIDTERM_WINFORM_PAINT
             get
             {
                 GraphicsPath path = new GraphicsPath();
-                if (this.Vertices.Count < 3)
-                    path.AddLine(startPoint, endPoint);
-                else
-                    path.AddPolygon(this.Vertices.ToArray());
+                path.AddPolygon(this.Vertices.ToArray());
+
+                //optimizing hehehe
+                if (this.Vertices.Count > 4 && !this.completedVertices)
+                {
+                    this.completedVertices = !this.completedVertices;
+                    this.Vertices.RemoveRange(0, 1);
+                }
 
                 return path;
             }

@@ -9,8 +9,8 @@ namespace MIDTERM_WINFORM_PAINT
 {
     public class Ellipse : Shape
     {
-        public Ellipse(PointF startPoint, PointF endPoint, float Width, Color ShapeColor, DashStyle ShapeDashStyle, bool isFill)
-            : base(startPoint, endPoint, Width, ShapeColor, ShapeDashStyle)
+        public Ellipse(PointF StartPoint, PointF EndPoint, float Width, Color ShapeColor, DashStyle ShapeDashStyle, bool isFill)
+            : base(StartPoint, EndPoint, Width, ShapeColor, ShapeDashStyle)
         {
             this.Name = "Ellipse";
             this.IsFill = isFill;
@@ -22,10 +22,10 @@ namespace MIDTERM_WINFORM_PAINT
             get
             {
                 GraphicsPath GPath = new GraphicsPath();
-                RectangleF r = new RectangleF(Math.Min(startPoint.X, endPoint.X),
-                            Math.Min(startPoint.Y, endPoint.Y),
-                            Math.Abs(endPoint.X - startPoint.X),
-                            Math.Abs(endPoint.Y - startPoint.Y));
+                RectangleF r = new RectangleF(Math.Min(StartPoint.X, EndPoint.X),
+                            Math.Min(StartPoint.Y, EndPoint.Y),
+                            Math.Abs(EndPoint.X - StartPoint.X),
+                            Math.Abs(EndPoint.Y - StartPoint.Y));
 
                 GPath.AddEllipse(r);
                 return GPath;
@@ -73,8 +73,8 @@ namespace MIDTERM_WINFORM_PAINT
 
         public override void Move(PointF Dis)
         {
-            startPoint = new PointF(startPoint.X + Dis.X, startPoint.Y + Dis.Y);
-            endPoint = new PointF(endPoint.X + Dis.X, endPoint.Y + Dis.Y);
+            StartPoint = new PointF(StartPoint.X + Dis.X, StartPoint.Y + Dis.Y);
+            EndPoint = new PointF(EndPoint.X + Dis.X, EndPoint.Y + Dis.Y);
         }
     }
 }

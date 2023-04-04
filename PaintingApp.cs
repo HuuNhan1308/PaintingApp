@@ -255,7 +255,7 @@ namespace MIDTERM_WINFORM_PAINT
             //when out of moving mode, dragging shape is on
             else if (IsPress)
             {
-                ListShape[ListShape.Count - 1].endPoint = e.Location;
+                ListShape[ListShape.Count - 1].EndPoint = e.Location;
                 PaintingBox.Invalidate();
             }
             else if (this.state == DrawingState.isDrawingPolygon)
@@ -274,7 +274,7 @@ namespace MIDTERM_WINFORM_PAINT
             //reset variable
             IsPress = false;
             Moving = false;
-            Console.WriteLine(ListShape[ListShape.Count - 1].startPoint.ToString() + ListShape[ListShape.Count - 1].endPoint.ToString());
+            Console.WriteLine(ListShape[ListShape.Count - 1].StartPoint.ToString() + ListShape[ListShape.Count - 1].EndPoint.ToString());
             PaintingBox.Invalidate();
         }
 
@@ -283,20 +283,18 @@ namespace MIDTERM_WINFORM_PAINT
         //handle draw outline for shape with specific case
         public void HandleDrawShapeOutline(Shape shape, Graphics gp)
         {
-            //Draw dash line at border (except line)
-            if (!(shape is Line))
+            //Draw dash line at border (except line and spcial case for polygon)
+            if (shape is Polygon polygon)
+                ShapeOutline.DrawOutlineSelected(gp, polygon.Vertices);
+            else if (!(shape is Line))
                 ShapeOutline.DrawOutlineSelected(gp,
-                    shape.startPoint, shape.endPoint);
+                    shape.StartPoint, shape.EndPoint);
 
             // Draw a circle as point for shape 
-            if (shape is Polygon)
-            {
-                //case polygon draw more circle than other shape
-
-                //ShapeOutline.DrawSelectedPoint(gp,
-                //    shape.startPoint, shape.endPoint);
-            }
-            else ShapeOutline.DrawSelectedPoint(gp, shape.startPoint, shape.endPoint);
+            if (shape is Polygon polygon1)
+                ShapeOutline.DrawSelectedPoint(gp, polygon1.Vertices);
+            //not pologon then draw a 
+            else ShapeOutline.DrawSelectedPoint(gp, shape.StartPoint, shape.EndPoint);
                 
         }
 
@@ -317,6 +315,9 @@ namespace MIDTERM_WINFORM_PAINT
             }
         }
 
+
+        ///APP FUNCTION
+        ///
         private void dashCheck_CheckedChanged(object sender, EventArgs e)
         {
             if (this.dashCheck.Checked)
@@ -377,6 +378,14 @@ namespace MIDTERM_WINFORM_PAINT
             }
         }
 
-        
+        private void PaintingBox_DoubleClick(object sender, EventArgs e)
+        {
+            switch(this.state)
+            {
+                case DrawingState.isDrawingPolygon:
+                    this.state = DrawingState.none;
+                    break;
+            }
+        }
     }
 }
