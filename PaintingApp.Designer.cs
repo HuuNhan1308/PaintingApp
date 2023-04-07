@@ -40,6 +40,7 @@
             this.polygonBtn = new System.Windows.Forms.Button();
             this.clearBtn = new System.Windows.Forms.Button();
             this.ZoomInBtn = new System.Windows.Forms.Button();
+            this.ZoomOutBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PaintingBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -169,6 +170,16 @@
             this.ZoomInBtn.UseVisualStyleBackColor = true;
             this.ZoomInBtn.Click += new System.EventHandler(this.ZoomInBtn_Click);
             // 
+            // ZoomOutBtn
+            // 
+            this.ZoomOutBtn.Location = new System.Drawing.Point(372, 12);
+            this.ZoomOutBtn.Name = "ZoomOutBtn";
+            this.ZoomOutBtn.Size = new System.Drawing.Size(75, 23);
+            this.ZoomOutBtn.TabIndex = 0;
+            this.ZoomOutBtn.Text = "Zoom out";
+            this.ZoomOutBtn.UseVisualStyleBackColor = true;
+            this.ZoomOutBtn.Click += new System.EventHandler(this.ZoomOutBtn_Click);
+            // 
             // PaintingApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -180,6 +191,7 @@
             this.Controls.Add(this.ungroupBtn);
             this.Controls.Add(this.groupBtn);
             this.Controls.Add(this.SelectBtn);
+            this.Controls.Add(this.ZoomOutBtn);
             this.Controls.Add(this.ZoomInBtn);
             this.Controls.Add(this.clearBtn);
             this.Controls.Add(this.polygonBtn);
@@ -211,6 +223,7 @@
         private System.Windows.Forms.Button polygonBtn;
         private System.Windows.Forms.Button clearBtn;
         private System.Windows.Forms.Button ZoomInBtn;
+        private System.Windows.Forms.Button ZoomOutBtn;
     }
 }
 

@@ -68,8 +68,8 @@ namespace MIDTERM_WINFORM_PAINT
             this.IsFill = IsFill;
             this.BorderColor = ShapeColor;
             this.Vertices.Add(StartPoint);
-            this.Vertices.Add(EndPoint);
-            this.Vertices.Add(EndPoint);
+            this.Vertices.Add(StartPoint);
+            this.Vertices.Add(StartPoint);
 
         }
 
@@ -139,6 +139,125 @@ namespace MIDTERM_WINFORM_PAINT
         public override void Resize(Graphics Gra)
         {
             throw new NotImplementedException();
+        }
+
+        public void SizeUP()
+        {
+            List<PointF> tmp = new List<PointF>();
+            tmp.Add(Vertices[0]);
+            Console.WriteLine("p[" + 0 + "]: " + Vertices[0]);
+            int len = Vertices.Count();
+            if (len > 2)
+            {
+                for (int i = 1; i < len; i++)
+                {
+                    Console.WriteLine("p[" + i + "]: " + Vertices[i]);
+                    //finding dx [0] and [i]
+                    float x = -Vertices[0].Y + Vertices[i].Y;
+                    float y = Vertices[0].X - Vertices[i].X;
+                    float dx1 = (float)x / y;
+                    Console.WriteLine("Dx1 0-" + i + ": " + dx1);
+                    if (i == 1)
+                    {
+                        PointF p2 = new PointF(this.Vertices[i].X + 3, this.Vertices[i].Y - (3 * dx1));
+                        tmp.Add(p2);
+                        Console.WriteLine("p[" + i + "]': " + tmp[i]);
+                    }
+                    else
+                    {
+                        x = -Vertices[i - 1].Y + Vertices[i].Y;
+                        y = Vertices[i - 1].X - Vertices[i].X;
+                        float dx2 = (float)x / y;
+                        Console.WriteLine("Dx1 " + (i - 1) + " - " + i + ": " + dx2);
+                        x = dx2 * (-tmp[i - 1].X) - tmp[i - 1].Y + dx1 * (Vertices[0].X) + Vertices[0].Y;
+                        x /= (dx1 - dx2);
+                        Console.WriteLine(x);
+                        y = -dx1 * (x - Vertices[0].X) + Vertices[0].Y;
+                        Console.WriteLine(y);
+                        PointF p2 = new PointF(x, y);
+                        tmp.Add(p2);
+                        Console.WriteLine("p[" + i + "]': " + tmp[i]);
+                    }
+                }
+                for (int i = 0; i < len; i++)
+                    Vertices[i] = tmp[i];
+            }
+            else
+            {
+                float x = -Vertices[0].Y + Vertices[1].Y;
+                float y = Vertices[0].X - Vertices[1].X;
+                float dx1 = (float)x / y;
+                Console.WriteLine("Dx1 0-" + 1 + ": " + dx1);
+                PointF p2 = new PointF(this.Vertices[1].X + 3, this.Vertices[1].Y - (3 * dx1));
+                Vertices[1] = p2;
+            }
+        }
+        public void SizeDW()
+        {
+            bool flag = true;
+            List<PointF> tmp = new List<PointF>();
+            tmp.Add(Vertices[0]);
+            Console.WriteLine("p[" + 0 + "]: " + Vertices[0]);
+            int len = Vertices.Count();
+            if (len > 2)
+            {
+                for (int i = 1; i < len; i++)
+                {
+                    Console.WriteLine("p[" + i + "]: " + Vertices[i]);
+                    //finding dx [0] and [i]
+                    float x = -Vertices[0].Y + Vertices[i].Y;
+                    float y = Vertices[0].X - Vertices[i].X;
+                    float dx1 = (float)x / y;
+                    Console.WriteLine("Dx1 0-" + i + ": " + dx1);
+                    if (i == 1)
+                    {
+                        PointF p2 = new PointF(this.Vertices[i].X - 3, this.Vertices[i].Y + (3 * dx1));
+                        float check = this.Vertices[i].X - 3 - this.Vertices[0].X;
+                        if (check > 5)
+                        {
+                            tmp.Add(p2);
+                            Console.WriteLine("p[" + i + "]': " + tmp[i]);
+                            flag = true;
+                        }
+                        else
+                        {
+                            flag = false;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        x = -Vertices[i - 1].Y + Vertices[i].Y;
+                        y = Vertices[i - 1].X - Vertices[i].X;
+                        float dx2 = (float)x / y;
+                        Console.WriteLine("Dx1 " + (i - 1) + " - " + i + ": " + dx2);
+                        x = dx2 * (-tmp[i - 1].X) - tmp[i - 1].Y + dx1 * (Vertices[0].X) + Vertices[0].Y;
+                        x /= (dx1 - dx2);
+                        Console.WriteLine(x);
+                        y = -dx1 * (x - Vertices[0].X) + Vertices[0].Y;
+                        Console.WriteLine(y);
+                        PointF p2 = new PointF(x, y);
+                        tmp.Add(p2);
+                        Console.WriteLine("p[" + i + "]': " + tmp[i]);
+                    }
+                }
+                if (flag == true)
+                    for (int i = 0; i < len; i++)
+                        Vertices[i] = tmp[i];
+            }
+            else
+            {
+                float check = this.Vertices[1].X - 10 - this.Vertices[0].X;
+                if (check > 5)
+                {
+                    float x = -Vertices[0].Y + Vertices[1].Y;
+                    float y = Vertices[0].X - Vertices[1].X;
+                    float dx1 = (float)x / y;
+                    Console.WriteLine("Dx1 0-" + 1 + ": " + dx1);
+                    PointF p2 = new PointF(this.Vertices[1].X - 3, this.Vertices[1].Y + (3 * dx1));
+                    Vertices[1] = p2;
+                }
+            }
         }
     }
 }

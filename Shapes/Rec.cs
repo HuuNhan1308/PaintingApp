@@ -36,6 +36,11 @@ namespace MIDTERM_WINFORM_PAINT
         }
         public override bool IsHit(PointF Point)
         {
+            //set start end point;
+            this.setStartEndPoint();
+
+            Console.WriteLine($"P1: {this.startPoint} -- P2: {this.endPoint}");
+
             bool result = false;
             using (GraphicsPath path = GetPath)
             {
@@ -69,6 +74,10 @@ namespace MIDTERM_WINFORM_PAINT
                         Gra.FillPath(myBrush, path);
                     }
                 }
+
+                ////set start end point;
+                //this.setStartEndPoint();
+
             }
         }
         public override void Move(PointF Dis)

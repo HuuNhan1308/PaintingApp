@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 
-//dang lam zoom in zoom out
+//dang lam zoom in zoom out --- coi lai cong thuc zoom in zoom out cho chuan?
 
 namespace MIDTERM_WINFORM_PAINT
 {
@@ -200,44 +200,23 @@ namespace MIDTERM_WINFORM_PAINT
 
                     //dang xu ly ungroup, tam thoi lam 
 
-                    /*this.SelectedShape = null;
+                    this.SelectedShape = null;
                     foreach (Shape myShape in ListShape)
                     {
                         //when hit the group
                         if (myShape is GroupOfShape groupOfShape && myShape.IsHit(e.Location))
                         {
-                            //press control key to choose more than one shape
-                            if (this.keyListen == Keys.ControlKey)
+                            //this.SelectedShape = myShape;
+                            DialogResult result = MessageBox.Show("Do you want to ungroup those shapes?", "Ungroup", MessageBoxButtons.YesNo);
+                            if (result == DialogResult.Yes)
                             {
-
-                                //draw outline for each shape in shapes selected
-                                //toggle ouline bool
-                                if (!myShape.isShowOutline)
-                                {
-                                    listShapeSelected.Add(myShape);
-                                    myShape.isShowOutline = true;
-                                }
-                                else
-                                {
-                                    listShapeSelected.Remove(myShape);
-                                    myShape.isShowOutline = false;
-                                }
-
-                                //draw outline after set outline bool
-                                this.PaintingBox.Invalidate();
+                                groupOfShape.Ungroup(ref this.ListShape);
+                                //ListShape.Remove(groupOfShape);
+                                break;
                             }
-                            else 
-                            {
-                                //this.SelectedShape = myShape;
-                                DialogResult result = MessageBox.Show("Do you want to ungroup those shapes?", "Ungroup", MessageBoxButtons.YesNo);
-                                if (result == DialogResult.Yes)
-                                    groupOfShape.Ungroup(ref this.ListShape);
-                            
-                            }
-
 
                         }
-                    }*/
+                    }
                     break;
                 default:
                     break;
@@ -280,7 +259,7 @@ namespace MIDTERM_WINFORM_PAINT
             IsPress = false;
             Moving = false;
             Console.WriteLine(ListShape[ListShape.Count - 1].StartPoint.ToString() + ListShape[ListShape.Count - 1].EndPoint.ToString());
-            PaintingBox.Invalidate();
+            //PaintingBox.Invalidate();
         }
 
         /// <summary>
@@ -355,7 +334,7 @@ namespace MIDTERM_WINFORM_PAINT
             {
                 case Keys.ControlKey:
                     
-
+                    //control up and group --> then group
                     if (this.mode == DrawingMode.group)
                     {
                         DialogResult result = DialogResult.None;
@@ -415,47 +394,73 @@ namespace MIDTERM_WINFORM_PAINT
         {
             PointF top, bot;
 
-            
-            //start point always < end point
-            foreach(Shape item in ListShape)
+
+
+
+            //case selectedShape is null;
+            try
             {
-                //get changing point
-                if (item is Polygon polygon)
-                {
-                    if (polygon.BorderStartPoint.X > polygon.BorderEndPoint.X)
-                    {
-                        top = polygon.EndPoint;
-                        bot = polygon.StartPoint;
-                    }
-                    else
-                    {
-                        top = polygon.StartPoint;
-                        bot = polygon.EndPoint;
-                    }
-                }
-                else
-                {
-                    if (item.StartPoint.X > item.EndPoint.X)
-                    {
-                        top = item.EndPoint;
-                        bot = item.StartPoint;
-                    }
-                    else
-                    {
-                        top = item.StartPoint;
-                        bot = item.EndPoint;
-                    }
-                }
-
-
-                if (item is Polygon polygon1)
-                {
-                    polygon1.BorderStartPoint = new PointF(top.X / 1.05f, top.Y * 1.05f);
-                    polygon1.EndPoint = new PointF(bot.X * 1.05f, bot.Y * 1.05f);
-                }
-                item.StartPoint = new PointF(top.X / 1.05f, top.Y * 1.05f);
-                item.EndPoint = new PointF(bot.X * 1.05f, bot.Y * 1.05f);
+                if (SelectedShape is null) throw new Exception("Select a shape to zoom");
             }
+            catch (Exception Ex)
+            {
+                MessageBox.Show($"Error: {Ex.Message.ToString()}");
+                return;
+            }
+
+            if (SelectedShape.StartPoint.X > SelectedShape.EndPoint.X)
+            {
+                top = SelectedShape.EndPoint;
+                bot = SelectedShape.StartPoint;
+            }
+            else
+            {
+                top = SelectedShape.StartPoint;
+                bot = SelectedShape.EndPoint;
+            }
+
+            //handle zoom
+            PointF baseTop = new PointF(top.X, top.Y);
+            PointF baseBottom = new PointF(bot.X, bot.Y);
+
+            SelectedShape.StartPoint = new PointF(top.X - baseTop.X * 0.02f, top.Y - baseTop.Y * 0.02f);
+            SelectedShape.EndPoint = new PointF(bot.X + baseBottom.X * 0.02f, bot.Y + baseBottom.Y * 0.02f);
+            this.PaintingBox.Invalidate();
+        }
+
+        private void ZoomOutBtn_Click(object sender, EventArgs e)
+        {
+            PointF top, bot;
+
+            //case selectedShape is null;
+            try
+            {
+                if (SelectedShape is null) throw new Exception("Select a shape to zoom");
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show($"Error: {Ex.Message.ToString()}");
+                return;
+            }
+
+            //if (SelectedShape.StartPoint.X > SelectedShape.EndPoint.X)
+            //{
+            //    top = SelectedShape.EndPoint;
+            //    bot = SelectedShape.StartPoint;
+            //}
+            //else
+            //{
+            //    top = SelectedShape.StartPoint;
+            //    bot = SelectedShape.EndPoint;
+            //}
+
+            //handle zoom
+            PointF baseTop = new PointF(SelectedShape.StartPoint.X, SelectedShape.StartPoint.Y);
+            PointF baseBottom = new PointF(SelectedShape.EndPoint.X, SelectedShape.EndPoint.Y);
+
+            SelectedShape.StartPoint = new PointF(SelectedShape.StartPoint.X + SelectedShape.StartPoint.X * 0.02f, SelectedShape.StartPoint.Y + SelectedShape.StartPoint.Y * 0.02f);
+            SelectedShape.EndPoint = new PointF(SelectedShape.EndPoint.X - SelectedShape.EndPoint.X * 0.02f, SelectedShape.EndPoint.Y - SelectedShape.EndPoint.Y * 0.02f);
+
             this.PaintingBox.Invalidate();
         }
     }

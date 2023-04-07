@@ -46,5 +46,26 @@ namespace MIDTERM_WINFORM_PAINT
 
         public abstract void Resize(Graphics Gra);
 
+        public void setStartEndPoint()
+        {
+            PointF tempPoint = new PointF();
+            //start point always less than end point
+
+            if (startPoint.X > endPoint.X)
+            {
+                tempPoint.X = endPoint.X;
+                endPoint.X = startPoint.X;
+                startPoint.X = tempPoint.X;
+            }
+
+            if (startPoint.Y > endPoint.Y)
+            {
+                tempPoint.Y = endPoint.Y;
+                endPoint.Y = startPoint.Y;
+                startPoint.Y = tempPoint.Y;
+            }
+            
+        }
+
     }
 }
