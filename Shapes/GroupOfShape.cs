@@ -146,5 +146,16 @@ namespace MIDTERM_WINFORM_PAINT
         {
             throw new NotImplementedException();
         }
+
+        public void SizeUP()
+        {
+            foreach (var item in shapes)
+                item.SizeUp();
+        }
+        public void SizeDW()
+        {
+            foreach (var item in shapes)
+                item.SizeDown();
+        }
     }
 }

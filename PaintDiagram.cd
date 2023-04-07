@@ -6,21 +6,21 @@
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAACCAAAIAAAgAAAEAAAEQCAACCAAAAAAQCAACAAAA=</HashCode>
+      <HashCode>AAAACCAAAKAAQgEAAEAAQEQCAACCAAAAAAQCAAGAAAg=</HashCode>
       <FileName>Shapes\Shape.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MIDTERM_WINFORM_PAINT.Line">
     <Position X="5.5" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAIAAAgAAAAAAAAAAAAACAAAAAAACAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAIAAAgAAAAAAAAAAAAACAAAAAAACAAEAAAA=</HashCode>
       <FileName>Shapes\Line.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MIDTERM_WINFORM_PAINT.Rec">
     <Position X="7.75" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAIAAAgAAAAAAAAAAAAACAAAAAAACAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAIAAAgAAAAAAAAAAAAACAAAAAAACAAEAAAA=</HashCode>
       <FileName>Shapes\Rec.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -34,22 +34,22 @@
   <Class Name="MIDTERM_WINFORM_PAINT.GroupOfShape">
     <Position X="10" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAYAAAgAEAAAABAAAAAACAgAAgAACIAAABAA=</HashCode>
+      <HashCode>IAAAAAAAAYAAAgEEAAAABAAAAAACAgAAgAACIAEABAA=</HashCode>
       <FileName>Shapes\GroupOfShape.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MIDTERM_WINFORM_PAINT.Ellipse">
     <Position X="3.25" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAIAAAgAAAAAAAAAAAAACAAAAAAACAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAIAAAgAAAAAAAAAAAAACAAAAAAACAAEAAAA=</HashCode>
       <FileName>Shapes\Ellipse.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MIDTERM_WINFORM_PAINT.Polygon">
     <Position X="1" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAIAAAgAAAAAAAAAAAAACAAAAEAACAAAAAAA=</HashCode>
-      <FileName>Polygon.cs</FileName>
+      <HashCode>IIAAAAAAAIQAAoEAAAAAQAAAAAACAAAAEAACAAEAAAA=</HashCode>
+      <FileName>Shapes\Polygon.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

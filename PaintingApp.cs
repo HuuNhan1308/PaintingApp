@@ -8,7 +8,8 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 
-//dang lam zoom in zoom out --- coi lai cong thuc zoom in zoom out cho chuan?
+//
+
 
 namespace MIDTERM_WINFORM_PAINT
 {
@@ -30,7 +31,7 @@ namespace MIDTERM_WINFORM_PAINT
         Color myColor = Color.Blue;
         Color borderColor = Color.Green;
         DashStyle ShapeDashStyle = DashStyle.Solid;
-        float width = 5;
+        float Width = 5;
         bool IsPress = false;
         bool isFill = false;
         List<Shape> ListShape = new List<Shape>();
@@ -95,17 +96,17 @@ namespace MIDTERM_WINFORM_PAINT
             switch (this.mode)
             {
                 case DrawingMode.line:
-                    Line myLine = new Line(e.Location, e.Location, width, myColor, ShapeDashStyle);
+                    Line myLine = new Line(e.Location, e.Location, Width, myColor, ShapeDashStyle);
                     ListShape.Add(myLine);
                     PaintingBox.Invalidate();
                     break;
                 case DrawingMode.rec:
-                    Rec myRec = new Rec(e.Location, e.Location, width, myColor, ShapeDashStyle, isFill);
+                    Rec myRec = new Rec(e.Location, e.Location, Width, myColor, ShapeDashStyle, isFill);
                     ListShape.Add(myRec);
                     PaintingBox.Invalidate();
                     break;
                 case DrawingMode.ellipse:
-                    Ellipse myEllipse = new Ellipse(e.Location, e.Location, width, myColor, ShapeDashStyle, isFill);
+                    Ellipse myEllipse = new Ellipse(e.Location, e.Location, Width, myColor, ShapeDashStyle, isFill);
                     ListShape.Add(myEllipse);
                     PaintingBox.Invalidate();
                     break;
@@ -115,7 +116,7 @@ namespace MIDTERM_WINFORM_PAINT
                     //if not drawing polygon then create a new one
                     if (this.state != DrawingState.isDrawingPolygon)
                     {
-                        Polygon myPolygon = new Polygon(e.Location, e.Location, width, myColor, ShapeDashStyle, isFill);
+                        Polygon myPolygon = new Polygon(e.Location, e.Location, Width, myColor, ShapeDashStyle, isFill);
                         ListShape.Add(myPolygon);
                         PaintingBox.Invalidate();
                         this.state = DrawingState.isDrawingPolygon;
@@ -124,20 +125,17 @@ namespace MIDTERM_WINFORM_PAINT
                     //kiem tra lai primitive or reference
                     else
                     {
-                        
                         Polygon myOldPolygon = ListShape[ListShape.Count - 1] as Polygon;
 
                         myOldPolygon.Vertices.Add(e.Location);
                     }
                     break;
-                case DrawingMode.move:
+                case DrawingMode.move:  //move = select button
                     foreach (Shape myShape in ListShape)
                     {
                         IsPress = false;
                         if (myShape.IsHit(e.Location))
                         {
-                            
-
                             //press control key to choose more than one shape
                             if (this.keyListen == Keys.ControlKey)
                             {
@@ -160,7 +158,11 @@ namespace MIDTERM_WINFORM_PAINT
                             this.PaintingBox.Invalidate();
                             //-----------optimize-----------
 
-
+                        }
+                        else
+                        {
+                            myShape.isShowOutline = false;
+                            this.PaintingBox.Invalidate();
                         }
                     }
                     break;
@@ -379,24 +381,9 @@ namespace MIDTERM_WINFORM_PAINT
             }
         }
 
-        //function copy from INDIAN :)))
-        Image ZoomPicture(Image image, Size size)
-        {
-            Bitmap bm = new Bitmap(image, Convert.ToInt32(image.Width * size.Width),
-                Convert.ToInt32(image.Height * size.Height));
-            Graphics gpu = Graphics.FromImage(bm);
-            gpu.InterpolationMode = InterpolationMode.HighQualityBicubic;
-
-            return bm;
-        }
 
         private void ZoomInBtn_Click(object sender, EventArgs e)
         {
-            PointF top, bot;
-
-
-
-
             //case selectedShape is null;
             try
             {
@@ -408,30 +395,13 @@ namespace MIDTERM_WINFORM_PAINT
                 return;
             }
 
-            if (SelectedShape.StartPoint.X > SelectedShape.EndPoint.X)
-            {
-                top = SelectedShape.EndPoint;
-                bot = SelectedShape.StartPoint;
-            }
-            else
-            {
-                top = SelectedShape.StartPoint;
-                bot = SelectedShape.EndPoint;
-            }
-
-            //handle zoom
-            PointF baseTop = new PointF(top.X, top.Y);
-            PointF baseBottom = new PointF(bot.X, bot.Y);
-
-            SelectedShape.StartPoint = new PointF(top.X - baseTop.X * 0.02f, top.Y - baseTop.Y * 0.02f);
-            SelectedShape.EndPoint = new PointF(bot.X + baseBottom.X * 0.02f, bot.Y + baseBottom.Y * 0.02f);
+            //zoom in ~20%
+            SelectedShape.SizeUp();
             this.PaintingBox.Invalidate();
         }
 
         private void ZoomOutBtn_Click(object sender, EventArgs e)
         {
-            PointF top, bot;
-
             //case selectedShape is null;
             try
             {
@@ -443,24 +413,8 @@ namespace MIDTERM_WINFORM_PAINT
                 return;
             }
 
-            //if (SelectedShape.StartPoint.X > SelectedShape.EndPoint.X)
-            //{
-            //    top = SelectedShape.EndPoint;
-            //    bot = SelectedShape.StartPoint;
-            //}
-            //else
-            //{
-            //    top = SelectedShape.StartPoint;
-            //    bot = SelectedShape.EndPoint;
-            //}
-
-            //handle zoom
-            PointF baseTop = new PointF(SelectedShape.StartPoint.X, SelectedShape.StartPoint.Y);
-            PointF baseBottom = new PointF(SelectedShape.EndPoint.X, SelectedShape.EndPoint.Y);
-
-            SelectedShape.StartPoint = new PointF(SelectedShape.StartPoint.X + SelectedShape.StartPoint.X * 0.02f, SelectedShape.StartPoint.Y + SelectedShape.StartPoint.Y * 0.02f);
-            SelectedShape.EndPoint = new PointF(SelectedShape.EndPoint.X - SelectedShape.EndPoint.X * 0.02f, SelectedShape.EndPoint.Y - SelectedShape.EndPoint.Y * 0.02f);
-
+            //zoom in ~20%
+            SelectedShape.SizeDown();
             this.PaintingBox.Invalidate();
         }
     }

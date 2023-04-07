@@ -45,6 +45,28 @@ namespace MIDTERM_WINFORM_PAINT
         public abstract bool IsHit(PointF Point);
 
         public abstract void Resize(Graphics Gra);
+        public virtual void SizeUp()
+        {
+            PointF top, bot;
+            float width, height;
+            width = this.EndPoint.X - this.StartPoint.X;
+            height = this.EndPoint.Y - this.StartPoint.Y;
+
+            //zoom in 20%
+            this.StartPoint = new PointF(this.StartPoint.X - width * 0.1f, this.StartPoint.Y - height * 0.1f);
+            this.EndPoint = new PointF(this.EndPoint.X + width * 0.1f, this.EndPoint.Y + height * 0.1f);
+        }
+        public virtual void SizeDown()
+        {
+            PointF top, bot;
+            float width, height;
+            width = this.EndPoint.X - this.StartPoint.X;
+            height = this.EndPoint.Y - this.StartPoint.Y;
+
+            //zoom in 20%
+            this.StartPoint = new PointF(this.StartPoint.X + width * 0.1f, this.StartPoint.Y + height * 0.1f);
+            this.EndPoint = new PointF(this.EndPoint.X - width * 0.1f, this.EndPoint.Y - height * 0.1f);
+        }
 
         public void setStartEndPoint()
         {

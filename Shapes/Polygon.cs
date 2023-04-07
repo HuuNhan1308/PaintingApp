@@ -141,7 +141,7 @@ namespace MIDTERM_WINFORM_PAINT
             throw new NotImplementedException();
         }
 
-        public void SizeUP()
+        private void SizeUP()
         {
             List<PointF> tmp = new List<PointF>();
             tmp.Add(Vertices[0]);
@@ -192,7 +192,7 @@ namespace MIDTERM_WINFORM_PAINT
                 Vertices[1] = p2;
             }
         }
-        public void SizeDW()
+        private void SizeDW()
         {
             bool flag = true;
             List<PointF> tmp = new List<PointF>();
@@ -258,6 +258,16 @@ namespace MIDTERM_WINFORM_PAINT
                     Vertices[1] = p2;
                 }
             }
+        }
+
+        public override void SizeUp()
+        {
+            this.SizeUP();
+        }
+
+        public override void SizeDown()
+        {
+            this.SizeDW();
         }
     }
 }

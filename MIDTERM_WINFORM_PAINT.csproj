@@ -50,7 +50,7 @@
     <Compile Include="HohoSource\HohoPointF.cs" />
     <Compile Include="Shapes\Ellipse.cs" />
     <Compile Include="Enum\enum.cs" />
-    <Compile Include="Polygon.cs" />
+    <Compile Include="Shapes\Polygon.cs" />
     <Compile Include="Shapes\GroupOfShape.cs" />
     <Compile Include="PaintingApp.cs">
       <SubType>Form</SubType>
@@ -75,6 +75,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="PaintDiagram.cd" />
     <None Include="Properties\Settings.settings">
@@ -89,6 +90,19 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resource\clear.png" />
+    <Content Include="Resource\Ellipse.png" />
+    <Content Include="Resource\Group.png" />
+    <Content Include="Resource\handDrag.png" />
+    <Content Include="Resource\Line.png" />
+    <Content Include="Resource\polygon.png" />
+    <Content Include="Resource\Rec.png" />
+    <Content Include="Resource\Ungroup.png" />
+    <Content Include="Resource\ZoomIn.png" />
+    <Content Include="Resource\ZoomOut.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
