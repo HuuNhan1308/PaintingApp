@@ -44,6 +44,10 @@
             this.clearBtn = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.PaintingBox = new System.Windows.Forms.PictureBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.borderColorBtn = new System.Windows.Forms.Button();
+            this.shapeColorBtn = new System.Windows.Forms.Button();
+            this.DashStyleList = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PaintingBox)).BeginInit();
@@ -52,10 +56,9 @@
             // solidCheck
             // 
             this.solidCheck.AutoSize = true;
-            this.solidCheck.Location = new System.Drawing.Point(735, 55);
-            this.solidCheck.Margin = new System.Windows.Forms.Padding(4);
+            this.solidCheck.Location = new System.Drawing.Point(542, 61);
             this.solidCheck.Name = "solidCheck";
-            this.solidCheck.Size = new System.Drawing.Size(60, 20);
+            this.solidCheck.Size = new System.Drawing.Size(49, 17);
             this.solidCheck.TabIndex = 2;
             this.solidCheck.Text = "Solid";
             this.solidCheck.UseVisualStyleBackColor = true;
@@ -64,10 +67,9 @@
             // dashCheck
             // 
             this.dashCheck.AutoSize = true;
-            this.dashCheck.Location = new System.Drawing.Point(735, 22);
-            this.dashCheck.Margin = new System.Windows.Forms.Padding(4);
+            this.dashCheck.Location = new System.Drawing.Point(542, 34);
             this.dashCheck.Name = "dashCheck";
-            this.dashCheck.Size = new System.Drawing.Size(61, 20);
+            this.dashCheck.Size = new System.Drawing.Size(51, 17);
             this.dashCheck.TabIndex = 3;
             this.dashCheck.Text = "Dash";
             this.dashCheck.UseVisualStyleBackColor = true;
@@ -82,10 +84,9 @@
             this.ZoomOutBtn.FlatAppearance.BorderSize = 2;
             this.ZoomOutBtn.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
             this.ZoomOutBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ZoomOutBtn.Location = new System.Drawing.Point(666, 15);
-            this.ZoomOutBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.ZoomOutBtn.Location = new System.Drawing.Point(500, 12);
             this.ZoomOutBtn.Name = "ZoomOutBtn";
-            this.ZoomOutBtn.Size = new System.Drawing.Size(48, 48);
+            this.ZoomOutBtn.Size = new System.Drawing.Size(36, 39);
             this.ZoomOutBtn.TabIndex = 0;
             this.ZoomOutBtn.UseVisualStyleBackColor = true;
             this.ZoomOutBtn.Click += new System.EventHandler(this.ZoomOutBtn_Click);
@@ -99,10 +100,9 @@
             this.ZoomInBtn.FlatAppearance.BorderSize = 2;
             this.ZoomInBtn.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
             this.ZoomInBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ZoomInBtn.Location = new System.Drawing.Point(666, 71);
-            this.ZoomInBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.ZoomInBtn.Location = new System.Drawing.Point(500, 58);
             this.ZoomInBtn.Name = "ZoomInBtn";
-            this.ZoomInBtn.Size = new System.Drawing.Size(48, 48);
+            this.ZoomInBtn.Size = new System.Drawing.Size(36, 39);
             this.ZoomInBtn.TabIndex = 0;
             this.ZoomInBtn.UseVisualStyleBackColor = true;
             this.ZoomInBtn.Click += new System.EventHandler(this.ZoomInBtn_Click);
@@ -116,10 +116,9 @@
             this.polygonBtn.FlatAppearance.BorderSize = 2;
             this.polygonBtn.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
             this.polygonBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.polygonBtn.Location = new System.Drawing.Point(65, 10);
-            this.polygonBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.polygonBtn.Location = new System.Drawing.Point(49, 8);
             this.polygonBtn.Name = "polygonBtn";
-            this.polygonBtn.Size = new System.Drawing.Size(48, 48);
+            this.polygonBtn.Size = new System.Drawing.Size(36, 39);
             this.polygonBtn.TabIndex = 0;
             this.polygonBtn.UseVisualStyleBackColor = true;
             this.polygonBtn.Click += new System.EventHandler(this.polygonBtn_Click);
@@ -133,10 +132,9 @@
             this.ellipseBtn.FlatAppearance.BorderSize = 2;
             this.ellipseBtn.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
             this.ellipseBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ellipseBtn.Location = new System.Drawing.Point(65, 68);
-            this.ellipseBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.ellipseBtn.Location = new System.Drawing.Point(49, 55);
             this.ellipseBtn.Name = "ellipseBtn";
-            this.ellipseBtn.Size = new System.Drawing.Size(48, 48);
+            this.ellipseBtn.Size = new System.Drawing.Size(36, 39);
             this.ellipseBtn.TabIndex = 0;
             this.ellipseBtn.UseVisualStyleBackColor = true;
             this.ellipseBtn.Click += new System.EventHandler(this.ellipseBtn_Click);
@@ -150,10 +148,9 @@
             this.recBtn.FlatAppearance.BorderSize = 2;
             this.recBtn.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
             this.recBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.recBtn.Location = new System.Drawing.Point(9, 68);
-            this.recBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.recBtn.Location = new System.Drawing.Point(7, 55);
             this.recBtn.Name = "recBtn";
-            this.recBtn.Size = new System.Drawing.Size(48, 48);
+            this.recBtn.Size = new System.Drawing.Size(36, 39);
             this.recBtn.TabIndex = 0;
             this.recBtn.UseVisualStyleBackColor = true;
             this.recBtn.Click += new System.EventHandler(this.recBtn_Click);
@@ -167,23 +164,25 @@
             this.lineBtn.FlatAppearance.BorderSize = 2;
             this.lineBtn.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
             this.lineBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lineBtn.Location = new System.Drawing.Point(9, 10);
-            this.lineBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.lineBtn.Location = new System.Drawing.Point(7, 8);
             this.lineBtn.Name = "lineBtn";
-            this.lineBtn.Size = new System.Drawing.Size(48, 48);
+            this.lineBtn.Size = new System.Drawing.Size(36, 39);
             this.lineBtn.TabIndex = 0;
             this.lineBtn.UseVisualStyleBackColor = true;
             this.lineBtn.Click += new System.EventHandler(this.lineBtn_Click);
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.ungroupBtn);
             this.panel1.Controls.Add(this.groupBtn);
             this.panel1.Controls.Add(this.SelectBtn);
             this.panel1.Controls.Add(this.clearBtn);
-            this.panel1.Location = new System.Drawing.Point(18, 4);
+            this.panel1.Location = new System.Drawing.Point(14, 3);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(128, 128);
+            this.panel1.Size = new System.Drawing.Size(96, 104);
             this.panel1.TabIndex = 4;
             // 
             // ungroupBtn
@@ -195,10 +194,9 @@
             this.ungroupBtn.FlatAppearance.BorderSize = 2;
             this.ungroupBtn.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
             this.ungroupBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ungroupBtn.Location = new System.Drawing.Point(12, 69);
-            this.ungroupBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.ungroupBtn.Location = new System.Drawing.Point(9, 56);
             this.ungroupBtn.Name = "ungroupBtn";
-            this.ungroupBtn.Size = new System.Drawing.Size(48, 48);
+            this.ungroupBtn.Size = new System.Drawing.Size(36, 39);
             this.ungroupBtn.TabIndex = 0;
             this.ungroupBtn.UseVisualStyleBackColor = true;
             this.ungroupBtn.Click += new System.EventHandler(this.ungroupBtn_Click);
@@ -212,10 +210,9 @@
             this.groupBtn.FlatAppearance.BorderSize = 2;
             this.groupBtn.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
             this.groupBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.groupBtn.Location = new System.Drawing.Point(68, 69);
-            this.groupBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBtn.Location = new System.Drawing.Point(51, 56);
             this.groupBtn.Name = "groupBtn";
-            this.groupBtn.Size = new System.Drawing.Size(48, 48);
+            this.groupBtn.Size = new System.Drawing.Size(36, 39);
             this.groupBtn.TabIndex = 0;
             this.groupBtn.UseVisualStyleBackColor = true;
             this.groupBtn.Click += new System.EventHandler(this.groupBtn_Click);
@@ -230,10 +227,9 @@
             this.SelectBtn.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
             this.SelectBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.SelectBtn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.SelectBtn.Location = new System.Drawing.Point(12, 11);
-            this.SelectBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.SelectBtn.Location = new System.Drawing.Point(9, 9);
             this.SelectBtn.Name = "SelectBtn";
-            this.SelectBtn.Size = new System.Drawing.Size(48, 48);
+            this.SelectBtn.Size = new System.Drawing.Size(36, 39);
             this.SelectBtn.TabIndex = 0;
             this.SelectBtn.UseVisualStyleBackColor = true;
             this.SelectBtn.Click += new System.EventHandler(this.moveBtn_Click);
@@ -247,32 +243,34 @@
             this.clearBtn.FlatAppearance.BorderSize = 2;
             this.clearBtn.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
             this.clearBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.clearBtn.Location = new System.Drawing.Point(68, 11);
-            this.clearBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.clearBtn.Location = new System.Drawing.Point(51, 9);
             this.clearBtn.Name = "clearBtn";
-            this.clearBtn.Size = new System.Drawing.Size(48, 48);
+            this.clearBtn.Size = new System.Drawing.Size(36, 39);
             this.clearBtn.TabIndex = 0;
             this.clearBtn.UseVisualStyleBackColor = true;
             this.clearBtn.Click += new System.EventHandler(this.clearBtn_Click);
             // 
             // panel2
             // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.polygonBtn);
             this.panel2.Controls.Add(this.ellipseBtn);
             this.panel2.Controls.Add(this.recBtn);
             this.panel2.Controls.Add(this.lineBtn);
-            this.panel2.Location = new System.Drawing.Point(165, 5);
+            this.panel2.Location = new System.Drawing.Point(124, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(125, 126);
+            this.panel2.Size = new System.Drawing.Size(94, 102);
             this.panel2.TabIndex = 5;
             // 
             // PaintingBox
             // 
+            this.PaintingBox.BackColor = System.Drawing.Color.White;
             this.PaintingBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.PaintingBox.Location = new System.Drawing.Point(16, 148);
-            this.PaintingBox.Margin = new System.Windows.Forms.Padding(4);
+            this.PaintingBox.Location = new System.Drawing.Point(8, 112);
             this.PaintingBox.Name = "PaintingBox";
-            this.PaintingBox.Size = new System.Drawing.Size(1246, 400);
+            this.PaintingBox.Size = new System.Drawing.Size(936, 326);
             this.PaintingBox.TabIndex = 1;
             this.PaintingBox.TabStop = false;
             this.PaintingBox.Paint += new System.Windows.Forms.PaintEventHandler(this.PaintingBox_Paint);
@@ -281,22 +279,85 @@
             this.PaintingBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PaintingBox_MouseMove);
             this.PaintingBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PaintingBox_MouseUp);
             // 
+            // button2
+            // 
+            this.button2.BackgroundImage = global::MIDTERM_WINFORM_PAINT.Properties.Resources.ZoomIn;
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.button2.FlatAppearance.BorderSize = 2;
+            this.button2.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Location = new System.Drawing.Point(500, 58);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(36, 39);
+            this.button2.TabIndex = 0;
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.ZoomInBtn_Click);
+            // 
+            // borderColorBtn
+            // 
+            this.borderColorBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.borderColorBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.borderColorBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.borderColorBtn.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.borderColorBtn.FlatAppearance.BorderSize = 2;
+            this.borderColorBtn.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.borderColorBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.borderColorBtn.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.borderColorBtn.Location = new System.Drawing.Point(232, 22);
+            this.borderColorBtn.Name = "borderColorBtn";
+            this.borderColorBtn.Size = new System.Drawing.Size(36, 39);
+            this.borderColorBtn.TabIndex = 0;
+            this.borderColorBtn.UseVisualStyleBackColor = false;
+            this.borderColorBtn.Click += new System.EventHandler(this.borderColorBtn_Click);
+            // 
+            // shapeColorBtn
+            // 
+            this.shapeColorBtn.BackColor = System.Drawing.Color.Lime;
+            this.shapeColorBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.shapeColorBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.shapeColorBtn.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.shapeColorBtn.FlatAppearance.BorderSize = 2;
+            this.shapeColorBtn.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.shapeColorBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.shapeColorBtn.Location = new System.Drawing.Point(255, 40);
+            this.shapeColorBtn.Name = "shapeColorBtn";
+            this.shapeColorBtn.Size = new System.Drawing.Size(36, 39);
+            this.shapeColorBtn.TabIndex = 0;
+            this.shapeColorBtn.UseVisualStyleBackColor = false;
+            this.shapeColorBtn.Click += new System.EventHandler(this.shapeColorBtn_Click);
+            // 
+            // DashStyleList
+            // 
+            this.DashStyleList.FormattingEnabled = true;
+            this.DashStyleList.Location = new System.Drawing.Point(615, 13);
+            this.DashStyleList.Name = "DashStyleList";
+            this.DashStyleList.Size = new System.Drawing.Size(121, 21);
+            this.DashStyleList.TabIndex = 6;
+            // 
             // PaintingApp
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1275, 570);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(255)))), ((int)(((byte)(232)))));
+            this.ClientSize = new System.Drawing.Size(956, 463);
+            this.Controls.Add(this.DashStyleList);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dashCheck);
             this.Controls.Add(this.solidCheck);
             this.Controls.Add(this.PaintingBox);
+            this.Controls.Add(this.borderColorBtn);
+            this.Controls.Add(this.shapeColorBtn);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.ZoomOutBtn);
             this.Controls.Add(this.ZoomInBtn);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "PaintingApp";
-            this.Text = "Form1";
+            this.Text = "Painting App";
+            this.Load += new System.EventHandler(this.PaintingApp_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PaintingApp_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PaintingApp_KeyUp);
             this.panel1.ResumeLayout(false);
@@ -324,6 +385,10 @@
         private System.Windows.Forms.Button ZoomOutBtn;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button borderColorBtn;
+        private System.Windows.Forms.Button shapeColorBtn;
+        private System.Windows.Forms.ComboBox DashStyleList;
     }
 }
 

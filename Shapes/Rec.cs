@@ -13,12 +13,13 @@ namespace MIDTERM_WINFORM_PAINT
         {
             this.Name = "Rectangle";
         }
-        public Rec(PointF StartPoint, PointF EndPoint, float Width, Color ShapeColor , DashStyle ShapeDastStyle, bool IsFill) 
+        public Rec(PointF StartPoint, PointF EndPoint, float Width, Color ShapeColor , DashStyle ShapeDastStyle, bool IsFill, Color BorderColor) 
             : base(StartPoint, EndPoint, Width, ShapeColor, ShapeDastStyle)
         {
             this.Name = "Rectangle";
             this.IsFill = IsFill;
-            this.BorderColor = ShapeColor;
+            this.BorderColor = BorderColor;
+            this.ShapeColor = ShapeColor;
         }
 
         public override GraphicsPath GetPath 

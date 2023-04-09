@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 
-//
+// thiet ke chinh width, chinh dash style.
 
 
 namespace MIDTERM_WINFORM_PAINT
@@ -28,8 +28,8 @@ namespace MIDTERM_WINFORM_PAINT
 
         //Pen MyPen;
         //Graphics gp;
-        Color myColor = Color.Blue;
-        Color borderColor = Color.Green;
+        private Color myColor = Color.Blue;
+        private Color borderColor = Color.Blue;
         DashStyle ShapeDashStyle = DashStyle.Solid;
         float Width = 5;
         bool IsPress = false;
@@ -101,12 +101,12 @@ namespace MIDTERM_WINFORM_PAINT
                     PaintingBox.Invalidate();
                     break;
                 case DrawingMode.rec:
-                    Rec myRec = new Rec(e.Location, e.Location, Width, myColor, ShapeDashStyle, isFill);
+                    Rec myRec = new Rec(e.Location, e.Location, Width, myColor, ShapeDashStyle, isFill, borderColor);
                     ListShape.Add(myRec);
                     PaintingBox.Invalidate();
                     break;
                 case DrawingMode.ellipse:
-                    Ellipse myEllipse = new Ellipse(e.Location, e.Location, Width, myColor, ShapeDashStyle, isFill);
+                    Ellipse myEllipse = new Ellipse(e.Location, e.Location, Width, myColor, ShapeDashStyle, isFill, borderColor);
                     ListShape.Add(myEllipse);
                     PaintingBox.Invalidate();
                     break;
@@ -116,7 +116,7 @@ namespace MIDTERM_WINFORM_PAINT
                     //if not drawing polygon then create a new one
                     if (this.state != DrawingState.isDrawingPolygon)
                     {
-                        Polygon myPolygon = new Polygon(e.Location, e.Location, Width, myColor, ShapeDashStyle, isFill);
+                        Polygon myPolygon = new Polygon(e.Location, e.Location, Width, myColor, ShapeDashStyle, isFill, borderColor);
                         ListShape.Add(myPolygon);
                         PaintingBox.Invalidate();
                         this.state = DrawingState.isDrawingPolygon;
@@ -299,6 +299,7 @@ namespace MIDTERM_WINFORM_PAINT
                 if (this.Moving)
                     this.HandleDrawShapeOutline(this.SelectedShape, e.Graphics);
             }
+
         }
 
 
@@ -328,6 +329,7 @@ namespace MIDTERM_WINFORM_PAINT
                     this.keyListen = Keys.ControlKey;
                     break;
             }
+
         }
 
         private void PaintingApp_KeyUp(object sender, KeyEventArgs e)
@@ -416,6 +418,32 @@ namespace MIDTERM_WINFORM_PAINT
             //zoom in ~20%
             SelectedShape.SizeDown();
             this.PaintingBox.Invalidate();
+        }
+
+        private void borderColorBtn_Click(object sender, EventArgs e)
+        {
+            ColorDialog dlg = new ColorDialog();
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                myColor = dlg.Color;
+                borderColorBtn.BackColor = dlg.Color;
+            }
+        }
+
+        private void shapeColorBtn_Click(object sender, EventArgs e)
+        {
+            ColorDialog dlg = new ColorDialog();
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                myColor = dlg.Color;
+                borderColorBtn.BackColor = dlg.Color;
+            }
+        }
+
+        private void PaintingApp_Load(object sender, EventArgs e)
+        {
+            this.myColor = this.shapeColorBtn.BackColor;
+            this.borderColor = this.borderColorBtn.BackColor;
         }
     }
 }

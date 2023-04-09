@@ -9,12 +9,13 @@ namespace MIDTERM_WINFORM_PAINT
 {
     public class Ellipse : Shape
     {
-        public Ellipse(PointF StartPoint, PointF EndPoint, float Width, Color ShapeColor, DashStyle ShapeDashStyle, bool isFill)
+        public Ellipse(PointF StartPoint, PointF EndPoint, float Width, Color ShapeColor, DashStyle ShapeDashStyle, bool isFill, Color BorderColor)
             : base(StartPoint, EndPoint, Width, ShapeColor, ShapeDashStyle)
         {
             this.Name = "Ellipse";
             this.IsFill = isFill;
-            this.BorderColor = ShapeColor;
+            this.BorderColor = BorderColor;
+            this.ShapeColor = ShapeColor;
         }
 
         public override GraphicsPath GetPath 

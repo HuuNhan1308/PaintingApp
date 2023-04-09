@@ -61,12 +61,13 @@ namespace MIDTERM_WINFORM_PAINT
             this.Name = "Polygon";
         }
 
-        public Polygon(PointF StartPoint, PointF EndPoint, float Width, Color ShapeColor, DashStyle ShapeDastStyle, bool IsFill)
+        public Polygon(PointF StartPoint, PointF EndPoint, float Width, Color ShapeColor, DashStyle ShapeDastStyle, bool IsFill, Color BorderColor)
             : base(StartPoint, EndPoint, Width, ShapeColor, ShapeDastStyle)
         {
             this.Name = "Rectangle";
             this.IsFill = IsFill;
-            this.BorderColor = ShapeColor;
+            this.BorderColor = BorderColor;
+            this.ShapeColor = ShapeColor;
             this.Vertices.Add(StartPoint);
             this.Vertices.Add(StartPoint);
             this.Vertices.Add(StartPoint);
