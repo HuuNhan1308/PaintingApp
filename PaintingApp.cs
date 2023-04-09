@@ -65,6 +65,11 @@ namespace MIDTERM_WINFORM_PAINT
         }
         private void moveBtn_Click(object sender, EventArgs e)
         {
+            if (this.ListShape.Count == 0)
+            {
+                MessageBox.Show("Please draw something so as to use this function");
+                return;
+            }
             this.mode = DrawingMode.move;
             this.IsPress = false;
         }
@@ -84,6 +89,14 @@ namespace MIDTERM_WINFORM_PAINT
         private void polygonBtn_Click(object sender, EventArgs e)
         {
             this.mode = DrawingMode.polygon;
+        }
+        private void ArcBtn_Click(object sender, EventArgs e)
+        {
+            this.mode = DrawingMode.arc;
+        }
+        private void CircleBtn_Click(object sender, EventArgs e)
+        {
+            this.mode = DrawingMode.circle;
         }
         //------------------------------------------------------------
 
@@ -110,6 +123,11 @@ namespace MIDTERM_WINFORM_PAINT
                     ListShape.Add(myEllipse);
                     PaintingBox.Invalidate();
                     break;
+                case DrawingMode.circle:
+                    Circle myCircle = new Circle(e.Location, e.Location, Width, myColor, ShapeDashStyle, isFill, borderColor);
+                    ListShape.Add(myCircle);
+                    PaintingBox.Invalidate();
+                    break;
                 case DrawingMode.polygon:
                     this.IsPress = false;
 
@@ -129,6 +147,11 @@ namespace MIDTERM_WINFORM_PAINT
 
                         myOldPolygon.Vertices.Add(e.Location);
                     }
+                    break;
+                case DrawingMode.arc:
+                    Arc myArc = new Arc(e.Location, e.Location, Width, myColor, ShapeDashStyle);
+                    ListShape.Add(myArc);
+                    PaintingBox.Invalidate();
                     break;
                 case DrawingMode.move:  //move = select button
                     foreach (Shape myShape in ListShape)
@@ -283,7 +306,6 @@ namespace MIDTERM_WINFORM_PAINT
             else ShapeOutline.DrawSelectedPoint(gp, shape.StartPoint, shape.EndPoint);
                 
         }
-
         private void PaintingBox_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
@@ -305,17 +327,92 @@ namespace MIDTERM_WINFORM_PAINT
 
         ///APP FUNCTION
         ///
-        private void dashCheck_CheckedChanged(object sender, EventArgs e)
-        {
-            if (this.dashCheck.Checked)
-                this.ShapeDashStyle = DashStyle.Dash;
-            else
-                this.ShapeDashStyle = DashStyle.Solid;
-        }
         private void clearBtn_Click(object sender, EventArgs e)
         {
             this.ListShape.Clear();
             this.PaintingBox.Invalidate();
+        }
+        private void PaintingApp_Load(object sender, EventArgs e)
+        {
+            this.myColor = this.shapeColorBtn.BackColor;
+            this.borderColor = this.borderColorBtn.BackColor;
+        }
+        private void DashStyleList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (this.DashStyleList.SelectedItem.ToString())
+            {
+                case "Solid":
+                    this.ShapeDashStyle = DashStyle.Solid;
+                    break;
+                case "Dash":
+                    this.ShapeDashStyle = DashStyle.Dash;
+                    break;
+                case "Dot":
+                    this.ShapeDashStyle = DashStyle.Dot;
+                    break;
+                case "Dash dot":
+                    this.ShapeDashStyle = DashStyle.DashDot;
+                    break;
+                case "Dash dot dot":
+                    this.ShapeDashStyle = DashStyle.DashDotDot;
+                    break;
+                default:
+                    this.ShapeDashStyle = DashStyle.Solid;
+                    break;
+
+            }
+        }
+        private void ZoomInBtn_Click(object sender, EventArgs e)
+        {
+            //case selectedShape is null;
+            try
+            {
+                if (SelectedShape is null) throw new Exception("Select a shape to zoom");
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show($"Error: {Ex.Message.ToString()}");
+                return;
+            }
+
+            //zoom in ~20%
+            SelectedShape.SizeUp();
+            this.PaintingBox.Invalidate();
+        }
+        private void ZoomOutBtn_Click(object sender, EventArgs e)
+        {
+            //case selectedShape is null;
+            try
+            {
+                if (SelectedShape is null) throw new Exception("Select a shape to zoom");
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show($"Error: {Ex.Message.ToString()}");
+                return;
+            }
+
+            //zoom in ~20%
+            SelectedShape.SizeDown();
+            this.PaintingBox.Invalidate();
+        }
+        private void borderColorBtn_Click(object sender, EventArgs e)
+        {
+            ColorDialog dlg = new ColorDialog();
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                myColor = dlg.Color;
+                borderColorBtn.BackColor = dlg.Color;
+            }
+        }
+        private void shapeColorBtn_Click(object sender, EventArgs e)
+        {
+            ColorDialog dlg = new ColorDialog();
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                myColor = dlg.Color;
+                borderColorBtn.BackColor = dlg.Color;
+            }
         }
 
 
@@ -383,67 +480,18 @@ namespace MIDTERM_WINFORM_PAINT
             }
         }
 
-
-        private void ZoomInBtn_Click(object sender, EventArgs e)
+        private void CloseBtn_Click(object sender, EventArgs e)
         {
-            //case selectedShape is null;
-            try
-            {
-                if (SelectedShape is null) throw new Exception("Select a shape to zoom");
-            }
-            catch (Exception Ex)
-            {
-                MessageBox.Show($"Error: {Ex.Message.ToString()}");
-                return;
-            }
-
-            //zoom in ~20%
-            SelectedShape.SizeUp();
-            this.PaintingBox.Invalidate();
+            this.Close();
         }
 
-        private void ZoomOutBtn_Click(object sender, EventArgs e)
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
-            //case selectedShape is null;
-            try
-            {
-                if (SelectedShape is null) throw new Exception("Select a shape to zoom");
-            }
-            catch (Exception Ex)
-            {
-                MessageBox.Show($"Error: {Ex.Message.ToString()}");
-                return;
-            }
-
-            //zoom in ~20%
-            SelectedShape.SizeDown();
-            this.PaintingBox.Invalidate();
+            if (this.PaintingBox.BackgroundImage == null)
+                this.PaintingBox.BackgroundImage = Properties.Resources.cat;
+            else this.PaintingBox.BackgroundImage = null;
         }
 
-        private void borderColorBtn_Click(object sender, EventArgs e)
-        {
-            ColorDialog dlg = new ColorDialog();
-            if (dlg.ShowDialog() == DialogResult.OK)
-            {
-                myColor = dlg.Color;
-                borderColorBtn.BackColor = dlg.Color;
-            }
-        }
-
-        private void shapeColorBtn_Click(object sender, EventArgs e)
-        {
-            ColorDialog dlg = new ColorDialog();
-            if (dlg.ShowDialog() == DialogResult.OK)
-            {
-                myColor = dlg.Color;
-                borderColorBtn.BackColor = dlg.Color;
-            }
-        }
-
-        private void PaintingApp_Load(object sender, EventArgs e)
-        {
-            this.myColor = this.shapeColorBtn.BackColor;
-            this.borderColor = this.borderColorBtn.BackColor;
-        }
+        
     }
 }

@@ -11,14 +11,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="MIDTERM_WINFORM_PAINT.Line">
-    <Position X="5.5" Y="5" Width="1.5" />
+    <Position X="5.5" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAIAAAgAAAAAAAAAAAAACAAAAAAACAAEAAAA=</HashCode>
       <FileName>Shapes\Line.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MIDTERM_WINFORM_PAINT.Rec">
-    <Position X="7.75" Y="5" Width="1.5" />
+    <Position X="7.75" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAIAAAgAAAAAAAAAAAAACAAAAAAACAAEAAAA=</HashCode>
       <FileName>Shapes\Rec.cs</FileName>
@@ -32,24 +32,38 @@
     </TypeIdentifier>
   </Class>
   <Class Name="MIDTERM_WINFORM_PAINT.GroupOfShape">
-    <Position X="10" Y="5" Width="1.5" />
+    <Position X="10" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAAAAAAAAYAAAgEEAAAABAAAAAACAgAAgAACIAEABAA=</HashCode>
       <FileName>Shapes\GroupOfShape.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MIDTERM_WINFORM_PAINT.Ellipse">
-    <Position X="3.25" Y="5" Width="1.5" />
+    <Position X="3.25" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAIAAAgAAAAAAAAAAAAACAAAAAAACAAEAAAA=</HashCode>
       <FileName>Shapes\Ellipse.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MIDTERM_WINFORM_PAINT.Polygon">
-    <Position X="1" Y="5" Width="1.5" />
+    <Position X="1" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IIAAAAAAAIQAAoEAAAAAQAAAAAACAAAAEAACAAEAAAA=</HashCode>
       <FileName>Shapes\Polygon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MIDTERM_WINFORM_PAINT.Arc">
+    <Position X="5.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAIAAAAAAAAAAAACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Arc.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MIDTERM_WINFORM_PAINT.Circle">
+    <Position X="3.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Circle.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

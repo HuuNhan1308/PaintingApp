@@ -13,6 +13,7 @@ namespace MIDTERM_WINFORM_PAINT
         ellipse,
         circle,
         polygon,
+        arc,
         move,
         group,
         ungroup

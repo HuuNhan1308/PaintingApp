@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Arc.cs" />
+    <Compile Include="Circle.cs" />
     <Compile Include="Enum\StartEndState.cs" />
     <Compile Include="Shapes\Ellipse.cs" />
     <Compile Include="Enum\enum.cs" />
@@ -95,10 +97,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resource\appicon.png" />
+    <Content Include="Resource\Arc.png" />
+    <Content Include="Resource\cat.jpg" />
+    <Content Include="Resource\Circle.png" />
     <Content Include="Resource\clear.png" />
     <Content Include="Resource\Ellipse.png" />
     <Content Include="Resource\Group.png" />
     <Content Include="Resource\handDrag.png" />
+    <Content Include="Resource\Close.png" />
     <Content Include="Resource\Line.png" />
     <Content Include="Resource\polygon.png" />
     <Content Include="Resource\Rec.png" />

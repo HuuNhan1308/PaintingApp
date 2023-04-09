@@ -38,7 +38,6 @@ namespace MIDTERM_WINFORM_PAINT
                 }
             }
 
-            Console.WriteLine(result ? "Hit the line" : "No hit");
             return result;
         }
         public override void Draw(Graphics Gra)
